@@ -4,6 +4,10 @@
 @import '@fontsource/raleway/latin-ext-400.css';
 @import '@fontsource/raleway/latin-ext-600.css';
 @import '@fontsource/raleway/latin-ext-700.css';
+@import '@fontsource/lora/latin-500.css';
+@import '@fontsource/lora/latin-600.css';
+@import '@fontsource/lora/latin-ext-500.css';
+@import '@fontsource/lora/latin-ext-600.css';
 
 :root {
   font-family: 'Raleway', sans-serif;
@@ -18,13 +22,11 @@
   --color-muted: #565a52;
   --color-forest: #356729;
   --color-forest-dark: #263e2c;
-  --color-orange: #f2682a;
   --color-cta: #a53f16;
   --color-cta-hover: #8c3211;
   --color-focus: #174d75;
   --color-soft: #e5e9df;
-  --color-line: #deded7;
-  --color-icon-surface: #f7eee7;
+  --color-line: #d6d6cc;
   --color-footer: #262a23;
   --color-footer-muted: #d0d2ca;
   --color-hero-eyebrow: #f7cfad;
@@ -53,8 +55,8 @@
   --radius-card: 22px;
   --radius-icon: 16px;
   --radius-pill: 999px;
-  --shadow-card: 0 16px 45px #24271c14;
-  --shadow-card-hover: 0 20px 48px #24271c1c;
+  --shadow-card: 0 4px 14px #24271c14;
+  --shadow-card-hover: 0 10px 24px #24271c1f;
   --shadow-nav: 0 4px 18px #24271c0d;
   --shadow-button: 0 8px 20px #f2682a30;
 }
@@ -69,9 +71,10 @@ a { color: inherit; }
 a:focus-visible,
 button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 4px; }
 img { max-width: 100%; height: auto; }
-h1, h2, h3 { font-family: 'Raleway', sans-serif; font-weight: 700; line-height: 1.15; margin: 0 0 var(--space-4); }
-h1 { font-size: clamp(2.8rem, 7vw, 5.4rem); letter-spacing: -.045em; }
-h2 { font-size: clamp(2rem, 4vw, 3.1rem); letter-spacing: -.035em; }
+h1, h2 { font-family: 'Lora', Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0 0 var(--space-4); }
+h3 { font-family: 'Raleway', sans-serif; font-weight: 700; line-height: 1.15; margin: 0 0 var(--space-4); }
+h1 { font-size: clamp(2.6rem, 6vw, 4.5rem); letter-spacing: -.025em; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); letter-spacing: -.015em; }
 h3 { font-size: 1.25rem; letter-spacing: -.02em; }
 p { max-width: 70ch; margin: var(--space-2) 0 var(--space-4); }
 .container { width: min(var(--content-width), calc(100% - 2 * var(--space-5))); margin-inline: auto; }

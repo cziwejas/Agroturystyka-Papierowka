@@ -2,6 +2,7 @@ document.documentElement.classList.add('js');
 
 const heroSlides = [...document.querySelectorAll('[data-hero-slide]')];
 const heroToggle = document.querySelector('[data-hero-toggle]');
+const heroDots = [...document.querySelectorAll('[data-hero-dot]')];
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 if (heroSlides.length > 1 && heroToggle) {
   let currentSlide = 0;
@@ -11,6 +12,10 @@ if (heroSlides.length > 1 && heroToggle) {
     heroSlides[currentSlide].classList.remove('is-active');
     currentSlide = index % heroSlides.length;
     heroSlides[currentSlide].classList.add('is-active');
+    heroDots.forEach((dot, position) => {
+      if (position === currentSlide) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
   };
   const stop = () => window.clearInterval(timer);
   const start = () => {
@@ -20,13 +25,16 @@ if (heroSlides.length > 1 && heroToggle) {
   const updateButton = () => {
     heroToggle.setAttribute('aria-pressed', String(paused));
     heroToggle.setAttribute('aria-label', paused ? 'Wznów zmianę zdjęć' : 'Zatrzymaj zmianę zdjęć');
-    heroToggle.textContent = paused ? '▶' : 'Ⅱ';
   };
   heroToggle.addEventListener('click', () => {
     paused = !paused;
     updateButton();
     start();
   });
+  heroDots.forEach((dot, position) => dot.addEventListener('click', () => {
+    setSlide(position);
+    start();
+  }));
   document.addEventListener('visibilitychange', start);
   reducedMotion.addEventListener('change', (event) => {
     if (event.matches) paused = true;

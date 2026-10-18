@@ -11,8 +11,18 @@ import jacuzzi from '../assets/img/jacuzzi.jpg';
     <Image class="hero-slide" data-hero-slide src={jacuzzi} alt="Bania ogrodowa przy drewnianym domu" widths={[640, 960, 1280, 1600]} sizes="100vw" format="webp" loading="lazy" />
   </div>
   <div class="hero-shade"></div>
-  <div class="container hero-content"><span class="eyebrow">Wytchnienie na Podlasiu</span><h1>Papierówka</h1><p>Agroturystyka · okolice Puszczy Białowieskiej</p><a class="button" href="/kontakt/">Zarezerwuj pobyt <span aria-hidden="true">↗</span></a></div>
-  <button class="hero-pause" type="button" data-hero-toggle aria-label="Zatrzymaj zmianę zdjęć" aria-pressed="false">Ⅱ</button>
+  <div class="container hero-content"><span class="eyebrow">Wytchnienie na Podlasiu</span><h1>Papierówka</h1><p>Agroturystyka · okolice Puszczy Białowieskiej</p><a class="button" href="/kontakt/">Zarezerwuj pobyt <span aria-hidden="true">→</span></a></div>
+  <div class="hero-controls">
+    <div class="hero-dots" role="group" aria-label="Wybór zdjęcia">
+      <button type="button" data-hero-dot aria-label="Zdjęcie 1" aria-current="true"></button>
+      <button type="button" data-hero-dot aria-label="Zdjęcie 2"></button>
+      <button type="button" data-hero-dot aria-label="Zdjęcie 3"></button>
+    </div>
+    <button class="hero-pause" type="button" data-hero-toggle aria-label="Zatrzymaj zmianę zdjęć" aria-pressed="false">
+      <svg class="icon-pause" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="4" height="12" rx="1"/><rect x="9" y="2" width="4" height="12" rx="1"/></svg>
+      <svg class="icon-play" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.4a1 1 0 0 1 1.52-.86l8 5.6a1 1 0 0 1 0 1.72l-8 5.6a1 1 0 0 1-1.52-.86V2.4Z"/></svg>
+    </button>
+  </div>
 </section>
 <style>
   .hero{position:relative;min-height:590px;height:min(74vh,760px);display:grid;align-items:center;overflow:hidden;background:var(--color-forest-dark);color:var(--color-white)}
@@ -22,8 +32,14 @@ import jacuzzi from '../assets/img/jacuzzi.jpg';
   .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,var(--color-hero-shade),var(--color-hero-shade-soft) 75%),linear-gradient(0deg,var(--color-hero-shade-bottom),transparent 50%);pointer-events:none}
   .hero::after{position:absolute;inset:auto 0 0;height:clamp(90px,14vw,180px);z-index:1;background:linear-gradient(to bottom,transparent,var(--color-white));content:'';pointer-events:none}
   .hero-content{position:relative;z-index:2;padding-block:clamp(3.5rem,8vw,5rem)}.hero .eyebrow{color:var(--color-hero-eyebrow)}.hero p{font-size:clamp(1.05rem,2vw,1.35rem);margin:var(--space-4) 0 var(--space-8)}.hero .button{min-width:180px;background:var(--color-forest-dark)}.hero .button:hover{background:var(--color-forest)}
-  .hero-pause{display:none;position:absolute;right:max(var(--space-5),calc((100vw - var(--content-width))/2));bottom:var(--space-5);z-index:2;width:46px;height:46px;border:1px solid var(--color-hero-control-border);border-radius:50%;background:var(--color-hero-control);color:var(--color-white);font:700 1rem 'Raleway',sans-serif;cursor:pointer}
-  .js .hero-pause{display:grid;place-items:center}
+  .hero-controls{display:none;position:absolute;right:max(var(--space-5),calc((100vw - var(--content-width))/2));bottom:var(--space-5);z-index:2;align-items:center;gap:var(--space-4)}
+  .js .hero-controls{display:flex}
+  .hero-dots{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3);border:1px solid var(--color-hero-control-border);border-radius:var(--radius-pill);background:var(--color-hero-control)}
+  .hero-dots button{width:10px;height:10px;padding:0;border:1px solid var(--color-hero-control-border);border-radius:50%;background:transparent;cursor:pointer;transition:background .2s ease,transform .2s ease}
+  .hero-dots button[aria-current="true"]{background:var(--color-white);border-color:var(--color-white);transform:scale(1.15)}
+  .hero-pause{display:grid;width:46px;height:46px;place-items:center;border:1px solid var(--color-hero-control-border);border-radius:50%;background:var(--color-hero-control);color:var(--color-white);cursor:pointer}
+  .hero-pause .icon-play,.hero-pause[aria-pressed="true"] .icon-pause{display:none}
+  .hero-pause[aria-pressed="true"] .icon-play{display:block}
   @media(max-width:650px){.hero{min-height:520px;height:70vh}.hero-content{padding-block:var(--space-12)}}
   @media(prefers-reduced-motion:reduce){.hero-slide{transition:none}}
 </style>
