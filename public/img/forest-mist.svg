@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520" fill="none">
+  <defs>
+    <linearGradient id="mist" x1="0" y1="0" x2="1600" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0f1e9"/>
+      <stop offset=".52" stop-color="#e6ebdf"/>
+      <stop offset="1" stop-color="#f2eee5"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(535 0 0 260 1080 65)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".56"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#6f914f" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#356729" stop-opacity=".025"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#mist)" d="M0 0h1600v520H0z"/>
+  <path fill="url(#glow)" d="M0 0h1600v520H0z"/>
+  <g fill="url(#leaf)" stroke="#356729" stroke-opacity=".09" stroke-width="2">
+    <path d="M1450 520c-14-118-8-224 26-338 9 103 8 215-26 338Z"/>
+    <path d="M1468 351c-84-12-135-57-166-135 76 31 133 77 166 135Z"/>
+    <path d="M1478 281c60-69 128-94 213-83-61 59-128 89-213 83Z"/>
+    <path d="M1459 433c-85 0-145-36-190-107 81 18 146 53 190 107Z"/>
+    <path d="M1470 397c57-72 123-102 208-97-56 64-121 99-208 97Z"/>
+    <path d="M165 520c8-101 1-189-29-283-8 86-6 179 29 283Z"/>
+    <path d="M151 379c73-11 117-51 144-119-66 28-115 68-144 119Z"/>
+    <path d="M143 318c-53-61-113-83-189-73 54 52 113 78 189 73Z"/>
+  </g>
+  <g stroke="#6f914f" stroke-opacity=".1" stroke-width="2">
+    <path d="M0 448c187-54 332-54 501 0s302 54 464 0 321-60 635-2"/>
+    <path d="M0 477c196-45 339-43 510 6s306 47 466-4 336-54 624-6"/>
+  </g>
+</svg>

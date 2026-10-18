@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" fill="none">
+  <defs>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#eee8d9"/>
+      <stop offset=".48" stop-color="#e7dfce"/>
+      <stop offset="1" stop-color="#f1ebde"/>
+    </linearGradient>
+    <linearGradient id="grain" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8d795d" stop-opacity="0"/>
+      <stop offset=".22" stop-color="#8d795d" stop-opacity=".12"/>
+      <stop offset=".52" stop-color="#fff" stop-opacity=".36"/>
+      <stop offset=".8" stop-color="#8d795d" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#8d795d" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#wood)" d="M0 0h1200v420H0z"/>
+  <path stroke="#9a886d" stroke-opacity=".18" d="M0 138.5h1200M0 280.5h1200"/>
+  <path fill="url(#grain)" d="M0 18h1200v5H0zM0 42h1200v2H0zM0 82h1200v7H0zM0 116h1200v2H0zM0 160h1200v6H0zM0 188h1200v2H0zM0 224h1200v5H0zM0 258h1200v2H0zM0 302h1200v7H0zM0 342h1200v3H0zM0 374h1200v6H0zM0 402h1200v2H0z"/>
+  <path stroke="#9a886d" stroke-opacity=".09" d="M74 52c72-12 117 12 199 2s114-4 171 3M682 105c62-10 106-7 171 3s112 5 185-4M158 203c87-8 127 5 202-2m497 52c61-8 105 4 157-1s82-9 133-4M37 361c92-9 145 7 223 0s119-4 185 2"/>
+</svg>
