@@ -1,0 +1,17 @@
+---
+import { site } from '../config/site';
+const path = Astro.url.pathname;
+const nav = [{ label: 'Strona główna', href: '/' }, { label: 'O nas', href: '/o-nas/' }, { label: 'Galeria', href: '/galeria/' }, { label: 'Kontakt', href: '/kontakt/' }];
+---
+<a class="skip-link" href="#main">Przejdź do treści</a>
+<header class="header">
+  <div class="topline"><div class="container topline-inner"><span>Spokojny wypoczynek na Podlasiu</span><a href={site.phoneHref}>Zadzwoń: {site.phone}</a></div></div>
+  <div class="container nav-wrap"><a class="brand" href="/" aria-label="Papierówka — strona główna"><span class="brand-mark">P</span><span>Papierówka<small>agroturystyka</small></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span class="sr-only">Otwórz menu</span><span></span><span></span><span></span></button>
+    <nav id="main-nav" aria-label="Główna nawigacja"><ul>{nav.map((item) => <li><a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a></li>)}</ul></nav>
+  </div>
+</header>
+<style>
+  .header{position:sticky;top:0;z-index:20;background:#fff;box-shadow:0 4px 18px #24271c0d}.topline{background:#356729;color:#fff;font-size:.83rem}.topline-inner{display:flex;justify-content:space-between;gap:1rem;padding:.38rem 0}.topline a{font-weight:700;text-decoration:none}.nav-wrap{min-height:84px;display:flex;align-items:center;justify-content:space-between;gap:1rem}.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-family:'Raleway',sans-serif;font-weight:700;font-size:1.25rem}.brand small{display:block;font:600 .65rem 'Raleway',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#72746d}.brand-mark{display:grid;place-items:center;width:45px;height:45px;border-radius:50%;background:#f2682a;color:#fff}.nav-wrap ul{list-style:none;display:flex;gap:clamp(1rem,3vw,2.2rem);margin:0;padding:0}.nav-wrap nav a{font-size:.91rem;font-weight:700;text-decoration:none}.nav-wrap nav a:hover,.nav-wrap nav a[aria-current=page]{color:#9b3912}.menu-toggle{display:none;background:transparent;border:0;padding:10px}.menu-toggle span:not(.sr-only){display:block;width:25px;height:2px;background:#252621;margin:5px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media(max-width:700px){.topline-inner span{display:none}.topline-inner{justify-content:center}.nav-wrap{min-height:72px;flex-wrap:wrap;padding-block:.75rem}.nav-wrap ul{display:grid;gap:.2rem}.nav-wrap nav a{display:block;padding:.75rem}.nav-wrap nav{display:block;position:static;order:3;flex-basis:100%;padding:0;box-shadow:none}.js .nav-wrap{flex-wrap:nowrap}.js .menu-toggle{display:block}.js .nav-wrap nav{display:none;position:absolute;z-index:5;top:112px;left:0;right:0;background:#fff;padding:1rem 20px 1.5rem;box-shadow:var(--shadow)}.js .nav-wrap nav[data-open="true"]{display:block}}
+</style>

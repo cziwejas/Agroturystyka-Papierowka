@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import outside from '../assets/img/zewnatrz.jpg';
+import gazebo from '../assets/img/altana.jpg';
+import jacuzzi from '../assets/img/jacuzzi.jpg';
+---
+<section class="hero" aria-label="Papierówka wśród podlaskiej przyrody">
+  <div class="hero-slides" aria-hidden="true">
+    <Image class="hero-slide is-active" data-hero-slide src={outside} alt="Dom agroturystyczny pośród zieleni" widths={[640, 960, 1280, 1600]} sizes="100vw" format="webp" loading="eager" fetchpriority="high" />
+    <Image class="hero-slide" data-hero-slide src={gazebo} alt="Altana wypoczynkowa w ogrodzie" widths={[640, 960, 1280, 1600]} sizes="100vw" format="webp" loading="lazy" />
+    <Image class="hero-slide" data-hero-slide src={jacuzzi} alt="Bania ogrodowa przy drewnianym domu" widths={[640, 960, 1280, 1600]} sizes="100vw" format="webp" loading="lazy" />
+  </div>
+  <div class="hero-shade"></div>
+  <div class="container hero-content"><span class="eyebrow">Wytchnienie na Podlasiu</span><h1>Papierówka</h1><p>Agroturystyka · okolice Puszczy Białowieskiej</p><a class="button" href="/kontakt/">Zarezerwuj pobyt <span aria-hidden="true">↗</span></a></div>
+  <button class="hero-pause" type="button" data-hero-toggle aria-label="Zatrzymaj zmianę zdjęć" aria-pressed="false">Ⅱ</button>
+</section>
+<style>
+  .hero{position:relative;min-height:590px;height:min(74vh,760px);display:grid;align-items:center;overflow:hidden;background:#53684a;color:#fff}
+  .hero-slides,.hero-slide{position:absolute;inset:0;width:100%;height:100%}
+  .hero-slide{object-fit:cover;opacity:0;transition:opacity 1.25s ease}
+  .hero-slide.is-active{opacity:1}
+  .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,#172319c9,#17231940 75%),linear-gradient(0deg,#1723195c,transparent 50%);pointer-events:none}
+  .hero::after{content:'';position:absolute;inset:auto 0 0;height:clamp(90px,14vw,180px);background:linear-gradient(to bottom,transparent,#fff);pointer-events:none;z-index:1}
+  .hero-content{position:relative;z-index:2;padding-block:70px}.hero .eyebrow{color:#f7cfad}.hero p{font-size:clamp(1.05rem,2vw,1.35rem);margin:1rem 0 2rem}.hero .button{min-width:180px}
+  .hero-pause{display:none;position:absolute;right:max(20px,calc((100vw - 1120px)/2));bottom:22px;z-index:2;width:42px;height:42px;border:1px solid #ffffffa0;border-radius:50%;background:#17231980;color:#fff;font:700 1rem 'Raleway',sans-serif;cursor:pointer}
+  .js .hero-pause{display:grid;place-items:center}
+  @media(max-width:650px){.hero{min-height:520px;height:70vh}}
+  @media(prefers-reduced-motion:reduce){.hero-slide{transition:none}}
+</style>

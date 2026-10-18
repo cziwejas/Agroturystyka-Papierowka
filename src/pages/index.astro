@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Amenities from '../components/Amenities.astro';
+import Area from '../components/Area.astro';
+import { site } from '../config/site';
+const title = 'Papierówka — agroturystyka na Podlasiu';
+---
+<BaseLayout title={title}><Hero />
+  <section class="welcome section"><div class="container"><span class="eyebrow">Dobrze, że jesteś</span><h2>Znajdź swój spokojny zakątek</h2><p>Zapraszamy do Papierówki — miejsca z domową atmosferą, gdzie można zwolnić, spędzić czas razem i cieszyć się podlaską przyrodą. Dom jest wygodny dla 8 osób, a na sofie w salonie mogą nocować jeszcze 2 osoby.</p><a href="/o-nas/">Poznaj nasze miejsce →</a></div></section>
+  <Amenities />
+  <section class="why"><div class="container why-grid"><div><span class="eyebrow">Małe przyjemności</span><h2>Dlaczego warto?</h2><p>Własny dom daje swobodę planowania dnia. Poranna kawa na świeżym powietrzu, rowerowa wycieczka, a wieczorem sauna i bania pod zadaszoną wiatą.</p></div><div class="why-note"><strong>Na wspólny czas</strong><p>Duży dom dla rodzin i grup — wygodnie dla 8 osób, do 10 z noclegiem na sofie.</p><strong>Blisko natury</strong><p>Wypoczynek w miejscowości Wasilkowo i wyprawy w okolice Puszczy Białowieskiej.</p></div></div></section>
+  <Area />
+  {site.showReviews && <section class="section reviews"><div class="container"><div class="section-title"><span class="eyebrow">Głosy gości</span><h2>Miłe wspomnienia</h2></div><div class="review-grid">{site.reviews.map((review) => <blockquote><span aria-hidden="true">“</span><p>{review.text}</p><cite>{review.author} · {review.date}</cite></blockquote>)}</div></div></section>}
+  <section class="cta"><div class="container cta-inner"><div><span class="eyebrow">Zaplanuj pobyt</span><h2>Masz pytania? Porozmawiajmy.</h2><p>Rezerwacje przyjmujemy telefonicznie i e-mailem.</p></div><a class="button button--light" href="/kontakt/">Zadzwoń lub napisz</a></div></section>
+</BaseLayout>
+<style>.welcome{text-align:center;background:#fff}.welcome .container{max-width:740px}.welcome h2{margin:.8rem 0}.welcome p,.why p{color:var(--muted)}.welcome a{font-weight:700;color:#9b3912}.why{padding:80px 0;background:#e5e9df}.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}.why-note{background:#fff;padding:2rem;border-radius:var(--radius);box-shadow:var(--shadow)}.why-note p{margin:.25rem 0 1.2rem}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}blockquote{margin:0;padding:1.5rem;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}blockquote>span{font:700 3rem 'Raleway',sans-serif;color:var(--orange);line-height:.8}blockquote p{min-height:65px}cite{font-size:.82rem;color:var(--muted);font-style:normal}.review-note{text-align:center;color:var(--muted);font-size:.85rem}.cta{background:#356729;color:#fff;padding:48px 0}.cta .eyebrow{color:#e1f0d8}.cta h2{margin:.3rem 0;font-size:clamp(1.8rem,4vw,2.5rem)}.cta p{margin:0}.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem}@media(max-width:650px){.why-grid,.review-grid{grid-template-columns:1fr}.why-grid{gap:2rem}.cta-inner{align-items:flex-start;flex-direction:column}}</style>

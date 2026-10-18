@@ -1,0 +1,3 @@
+Contact: mailto:[[EMAIL]]
+Preferred-Languages: pl, en
+Policy: __SITE_URL__/polityka-prywatnosci/

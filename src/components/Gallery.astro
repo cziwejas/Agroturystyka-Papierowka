@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import outside from '../assets/img/zewnatrz.jpg';
+import gazebo from '../assets/img/altana.jpg';
+import firepit from '../assets/img/altana-wieczorem.jpg';
+import living from '../assets/img/salon.jpg';
+import entry from '../assets/img/wnetrze.jpg';
+import jacuzzi from '../assets/img/jacuzzi.jpg';
+const pictures = [
+  { src: outside, alt: 'Dom agroturystyczny otoczony zielenią', title: 'Dom i okolica' },
+  { src: gazebo, alt: 'Drewniana altana z miejscem do wypoczynku', title: 'Altana' },
+  { src: firepit, alt: 'Wieczorny wypoczynek przy palenisku pod altaną', title: 'Wieczory przy ogniu' },
+  { src: living, alt: 'Przytulny salon z drewnianymi elementami', title: 'Wnętrza' },
+  { src: entry, alt: 'Drewniane wnętrze domu', title: 'Domowe ciepło' },
+  { src: jacuzzi, alt: 'Bania ogrodowa przy drewnianym domu', title: 'Strefa relaksu' },
+];
+---
+<div class="gallery">{pictures.map((picture) => <a class="tile" href={picture.src.src} data-lightbox data-alt={picture.alt} data-caption={picture.title}><Image src={picture.src} alt={picture.alt} widths={[480, 720, 960, 1200]} sizes="(max-width: 700px) 100vw, 33vw" format="webp" loading="lazy"/><span>{picture.title}</span></a>)}</div>
+<dialog id="lightbox" aria-label="Podgląd zdjęcia"><button class="close" type="button" data-close aria-label="Zamknij podgląd">×</button><button class="previous" type="button" data-previous aria-label="Poprzedni obraz">‹</button><figure><img src="" alt=""/><figcaption></figcaption></figure><button class="next" type="button" data-next aria-label="Następny obraz">›</button></dialog>
+<style>.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.tile{position:relative;display:block;overflow:hidden;min-height:220px;border-radius:var(--radius);background:#ddd}.tile img{display:block;width:100%;height:100%;min-height:260px;object-fit:cover;transition:transform .25s}.tile:hover img{transform:scale(1.03)}.tile span{position:absolute;inset:auto 0 0;padding:2.5rem 1rem 1rem;color:white;font-weight:700;background:linear-gradient(transparent,#182018b5)}dialog{position:fixed;inset:0;margin:auto;border:0;border-radius:18px;padding:50px 58px 25px;background:#20241f;color:white;max-width:min(94vw,1000px);max-height:92vh}dialog::backdrop{background:#10130fdd}dialog figure{margin:0}dialog img{display:block;max-height:72vh;max-width:100%;margin:auto}figcaption{text-align:center;padding-top:.8rem}.close,.previous,.next{position:absolute;border:0;border-radius:50%;width:42px;height:42px;background:#fff;color:#252621;font-size:1.8rem;cursor:pointer}.close{right:10px;top:10px}.previous{left:10px;top:50%}.next{right:10px;top:50%}@media(max-width:700px){.gallery{grid-template-columns:1fr 1fr}.tile img{min-height:200px}}@media(max-width:460px){.gallery{grid-template-columns:1fr}}</style>

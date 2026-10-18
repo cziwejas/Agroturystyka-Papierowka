@@ -1,0 +1,10 @@
+@import '@fontsource/raleway/latin-400.css';
+@import '@fontsource/raleway/latin-600.css';
+@import '@fontsource/raleway/latin-700.css';
+@import '@fontsource/raleway/latin-ext-400.css';
+@import '@fontsource/raleway/latin-ext-600.css';
+@import '@fontsource/raleway/latin-ext-700.css';
+
+:root{font-family:'Raleway',sans-serif;color:#252621;background:#efeeea;font-synthesis:none;text-rendering:optimizeLegibility;--paper:#efeeea;--white:#fff;--orange:#f2682a;--green:#5b9a42;--ink:#252621;--muted:#62645d;--radius:22px;--shadow:0 16px 45px #24271c14}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;line-height:1.65}a{color:inherit}a:focus-visible,button:focus-visible{outline:3px solid #174d75;outline-offset:4px}img{max-width:100%;height:auto}h1,h2,h3{font-family:'Raleway',sans-serif;font-weight:700;line-height:1.2;margin:0 0 1rem}h1{font-size:clamp(2.8rem,7vw,5.4rem)}h2{font-size:clamp(2rem,4vw,3.1rem)}h3{font-size:1.25rem}p{margin:.5rem 0 1rem}.container{width:min(1120px,calc(100% - 40px));margin-inline:auto}.section{padding:clamp(64px,9vw,112px) 0}.eyebrow{color:#356729;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem}.section-title{max-width:680px;margin:0 auto 2.5rem;text-align:center}.section-title p{color:var(--muted)}.button{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.85rem 1.35rem;background:#b54110;color:#fff;text-decoration:none;font-weight:700;border-radius:999px;box-shadow:0 8px 20px #f2682a30;transition:transform .2s,background .2s}.button:hover{transform:translateY(-2px);background:#8c3211}.button--light{background:#fff;color:var(--ink)}.skip-link{position:absolute;left:12px;top:-100px;z-index:100;background:#fff;padding:12px}.skip-link:focus{top:12px}.muted{color:var(--muted)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}

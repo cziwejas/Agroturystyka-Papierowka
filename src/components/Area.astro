@@ -1,0 +1,5 @@
+---
+import { site } from '../config/site';
+---
+<section class="section area"><div class="container area-inner"><div><span class="eyebrow">Warto ruszyć w drogę</span><h2>Odkryj okolicę</h2><p>Miejscowość Wasilkowo to dobra baza do spokojnych spacerów, wycieczek rowerowych i poznawania Podlasia. Sprawdź pobliskie miejsca i zaplanuj swój dzień.</p><a href={site.mapUrl} target="_blank" rel="noopener noreferrer">Zobacz mapę okolicy ↗</a></div><ul>{site.areaDistances.map((item) => <li><span>{item.place}</span><strong>{item.distance}</strong></li>)}</ul></div></section>
+<style>.area{background:#fff}.area-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,8vw,7rem);align-items:center}.area p{color:var(--muted);max-width:500px}.area a{color:#9b3912;font-weight:700}ul{list-style:none;padding:0;margin:0}li{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px solid #e7e5df}li strong{color:#356729}@media(max-width:700px){.area-inner{grid-template-columns:1fr}}</style>
