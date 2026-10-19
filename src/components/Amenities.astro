@@ -2,5 +2,5 @@
 import FeatureCard from './FeatureCard.astro';
 import { amenities } from '../config/site';
 ---
-<section class="section"><div class="container"><div class="section-title"><span class="eyebrow">Wszystko na miejscu</span><h2>Wypoczynek po swojemu</h2><p>Przestrzeń dla bliskich, chwile relaksu i podlaska przyroda tuż obok.</p></div><div class="grid">{amenities.map((item) => <FeatureCard {...item} />)}</div></div></section>
-<style>.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.grid{grid-template-columns:1fr}}</style>
+<section class="section amenities"><div class="container"><div class="section-title"><span class="eyebrow">Wszystko na miejscu</span><h2>Wypoczynek po swojemu</h2><p>Przestrzeń dla bliskich, chwile relaksu i podlaska przyroda tuż obok.</p></div><div class="grid">{amenities.map((item) => <FeatureCard {...item} />)}</div></div></section>
+<style>.amenities{background:var(--color-paper)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5)}@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.grid{grid-template-columns:1fr}}</style>
