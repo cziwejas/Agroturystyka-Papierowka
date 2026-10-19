@@ -2,7 +2,7 @@ const forestDistance = '1 km';
 
 export const site = {
   name: 'Papierówka',
-  description: 'Agroturystyka w miejscowości Wasilkowo, 1 km od Puszczy Białowieskiej. Wypoczynek dla 8 osób, z możliwością noclegu dla 10.',
+  description: 'Agroturystyka w miejscowości Wasilkowo, 1 km od Puszczy Białowieskiej. Wypoczynek dla 8 osób, z możliwością zakwaterowania do 10 osób.',
   url: 'https://agroturystyka-papierowka.pl',
   phone: '504 867 746',
   phoneHref: 'tel:+48504867746',
@@ -15,7 +15,7 @@ export const site = {
   price: 'Od 500 zł za dobę przy pobycie tygodniowym; ceny weekendowe do uzgodnienia.',
   eventPrice: 'Wieczory panieńskie i kawalerskie: 1 000 zł za dobę.',
   relaxationPrice: 'Strefa relaksu — sauna i bania — jest dodatkowo płatna; cena do uzgodnienia.',
-  guests: '8 osób komfortowo; do 10 osób z miejscami do spania na sofie w salonie',
+  guests: '8 osób komfortowo; do 10 osób z 2 dodatkowymi miejscami noclegowymi w salonie',
   forestDistance,
   administrator: 'Dorota Frankowska-Sajewicz',
   checkIn: '16:00',
