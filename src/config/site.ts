@@ -30,7 +30,8 @@ export const site = {
   
   // googleMapsEmbedUrl: 'https://www.google.com/maps?q=Wasilkowo%206,%2017-200%20Wasilkowo&output=embed',
   googleMapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32000!2d23.576249112315196!3d52.82284091364794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472015dcd03a9327%3A0x493cca631c0e0282!2sAgroturystyka%20Papier%C3%B3wka!5e0!3m2!1spl!2spl!4v1792354544317!5m2!1spl!2spl',
-  mapUrl: 'https://www.google.com/maps/search/?api=1&query=Wasilkowo%206%2C%2017-200%20Wasilkowo',
+  mapUrl: 'https://www.google.com/maps/search/?api=1&query=Agroturystyka%20Papier%C3%B3wka%2C%20Wasilkowo',
+  directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Agroturystyka%20Papier%C3%B3wka%2C%20Wasilkowo',
   showReviews: true,
   reviews: [
     {
