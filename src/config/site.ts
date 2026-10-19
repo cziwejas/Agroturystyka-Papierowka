@@ -3,7 +3,7 @@ const forestDistance = '1 km';
 export const site = {
   name: 'Papierówka',
   description: 'Agroturystyka w miejscowości Wasilkowo, 1 km od Puszczy Białowieskiej. Wypoczynek dla 8 osób, z możliwością noclegu dla 10.',
-  url: 'https://papierowka.example',
+  url: 'https://agroturystyka-papierowka.pl',
   phone: '504 867 746',
   phoneHref: 'tel:+48504867746',
   email: 'agroturystyka.papierowka@gmail.com',
@@ -17,14 +17,14 @@ export const site = {
   relaxationPrice: 'Strefa relaksu — sauna i bania — jest dodatkowo płatna; cena do uzgodnienia.',
   guests: '8 osób komfortowo; do 10 osób z miejscami do spania na sofie w salonie',
   forestDistance,
-  administrator: '[[ADMINISTRATOR]]',
+  administrator: 'Dorota Frankowska-Sajewicz',
   checkIn: '16:00',
   checkOut: '11:00',
   pets: 'Teren jest ogrodzony, zwierzęta są mile widziane.',
   bookingTerms: 'Wysokość opłaty rezerwacyjnej i zasady anulowania pobytu do uzgodnienia przed rezerwacją.',
-  privacyLegalBasis: '[[PODSTAWA_PRAWNA_I_OKRES_PRZECHOWYWANIA]]',
-  hostingInfo: '[[DANE_DOSTAWCY_HOSTINGU_I_LOGÓW]]',
-  privacyRights: '[[INFORMACJE_O_PRAWACH_RODO]]',
+  privacyLegalBasis: 'Dane przetwarzamy na podstawie art. 6 ust. 1 lit. b RODO, gdy kontakt dotyczy podjęcia działań przed rezerwacją lub realizacji pobytu, oraz art. 6 ust. 1 lit. f RODO w zakresie ustalenia, dochodzenia lub obrony ewentualnych roszczeń. Zapytania, które nie zakończyły się rezerwacją, przechowujemy przez 12 miesięcy od zakończenia korespondencji. Dane dotyczące rezerwacji przechowujemy przez okres jej realizacji i rozliczenia oraz do upływu właściwego terminu przedawnienia roszczeń; dokumentację księgową — przez okres wymagany przepisami prawa.',
+  hostingInfo: 'Strona jest hostowana na platformie Cloudflare Pages (Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA); polityka prywatności: cloudflare.com/privacypolicy. Domena zarejestrowana u OVHcloud (OVH SAS, 2 rue Kellermann, 59100 Roubaix, Francja); polityka prywatności: ovhcloud.com/pl/personal-data-management. Wymienieni dostawcy mogą przetwarzać standardowe logi dostępu (adres IP, znacznik czasu, żądanie HTTP) wyłącznie w zakresie niezbędnym do świadczenia usługi.',
+  privacyRights: 'Przysługuje Ci prawo dostępu do danych, ich sprostowania, usunięcia lub ograniczenia przetwarzania, a także prawo do wniesienia sprzeciwu wobec przetwarzania. Możesz skontaktować się z administratorem w każdej chwili. Jeśli uważasz, że przetwarzanie narusza przepisy RODO, masz prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (UODO), ul. Stawki 2, 00-193 Warszawa; uodo.gov.pl.',
   // Swap this iframe URL with the src from Google Maps → Share → Embed a map
   // after selecting the verified Papierówka business listing.
   
