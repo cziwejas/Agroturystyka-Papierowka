@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import outside from '../assets/img/zewnatrz.jpg';
-import gazebo from '../assets/img/altana.jpg';
+import gazebo from '../assets/img/altana1.jpg';
 ---
 <section class="hero" aria-label="Papierówka wśród podlaskiej przyrody">
   <div class="hero-slides" aria-hidden="true">
@@ -25,7 +25,7 @@ import gazebo from '../assets/img/altana.jpg';
   .hero{position:relative;min-height:590px;height:min(86vh,900px);display:grid;align-items:center;overflow:hidden;background:var(--color-forest-dark);color:var(--color-white)}
   .hero-slides,.hero-slide{position:absolute;inset:0;width:100%;height:100%}
   .hero-slide{object-fit:cover;opacity:0;transition:opacity 1.25s ease}
-  .hero-slide:first-child{object-position:50% 44%}
+  .hero-slide:first-child{object-position:50% 30%}
   .hero-slide.is-active{opacity:1}
   .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,var(--color-hero-shade),var(--color-hero-shade-soft) 75%),linear-gradient(0deg,var(--color-hero-shade-bottom),transparent 50%);pointer-events:none}
   .hero::after{position:absolute;inset:auto 0 0;height:clamp(90px,14vw,180px);z-index:1;background:linear-gradient(to bottom,transparent,var(--color-white));content:'';pointer-events:none}
