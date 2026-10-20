@@ -45,6 +45,9 @@ const headers = await readFile(headersPath, 'utf8');
 if (!headers.includes('__JSONLD_HASH__')) throw new Error('Brak znacznika hasha JSON-LD w dist/_headers');
 const securedHeaders = headers.replace('__JSONLD_HASH__', digest);
 await writeFile(headersPath, securedHeaders);
+const vercelConfig = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'));
+const vercelCsp = vercelConfig.headers.flatMap(({ headers }) => headers).find(({ key }) => key.toLowerCase() === 'content-security-policy')?.value;
+if (!vercelCsp?.includes(`'sha256-${digest}'`)) throw new Error('CSP w vercel.json nie zawiera aktualnego hasha JSON-LD');
 
 const securityPath = new URL('.well-known/security.txt', dist);
 const email = config.match(/^\s*email:\s*'([^']+)'/m)?.[1];
