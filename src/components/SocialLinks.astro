@@ -1,0 +1,17 @@
+---
+import { site } from '../config/site';
+---
+<nav class="social-links" aria-label="Media społecznościowe">
+  <a href={site.socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook Agroturystyki Papierówka" title="Facebook">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8h3.4Z"/></svg>
+  </a>
+  <a href={site.socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram Agroturystyki Papierówka" title="Instagram">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="social-dot" cx="17.7" cy="6.7" r=".9"/></svg>
+  </a>
+  <a href={site.socialLinks.google} target="_blank" rel="noopener noreferrer" aria-label="Profil Google Agroturystyki Papierówka" title="Google">
+    <svg class="google-icon" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15Z"/><path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.8l-6.7-5.1c-1.8 1.2-4.1 2-6.8 2-5.2 0-9.6-3.5-11.2-8.2H5.9v5.3A20 20 0 0 0 24 44Z"/><path fill="#FBBC05" d="M12.8 27.9a12 12 0 0 1 0-7.8v-5.3H5.9a20 20 0 0 0 0 18.4l6.9-5.3Z"/><path fill="#EA4335" d="M24 11.9c3 0 5.7 1 7.8 3.1l5.8-5.8C34.1 5.8 29.5 4 24 4A20 20 0 0 0 5.9 14.8l6.9 5.3c1.6-4.7 6-8.2 11.2-8.2Z"/></svg>
+  </a>
+</nav>
+<style>
+  .social-links{display:flex;gap:var(--space-2)}.social-links a{display:grid;width:40px;height:40px;place-items:center;border:1px solid #ffffff35;border-radius:50%;background:#ffffff0a;color:var(--color-white);transition:background .2s ease,transform .2s ease}.social-links a:hover{background:#ffffff20;transform:translateY(-2px)}.social-links svg{width:21px;height:21px;fill:currentColor}.social-links a:nth-child(1) svg{fill:#1877f2}.social-links a:nth-child(2) svg{fill:none;stroke:#e1306c;stroke-width:1.8}.social-links a:nth-child(2) .social-dot{fill:#e1306c;stroke:none}.social-links .google-icon{width:24px;height:24px;fill:initial}
+</style>
