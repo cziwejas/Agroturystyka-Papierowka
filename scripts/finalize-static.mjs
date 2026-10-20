@@ -1,32 +1,40 @@
 import { createHash } from 'node:crypto';
-import { readFile, writeFile, access } from 'node:fs/promises';
+import { readFile, writeFile, access, readdir } from 'node:fs/promises';
 
 const dist = new URL('../dist/', import.meta.url);
 const config = await readFile(new URL('../src/config/site.ts', import.meta.url), 'utf8');
 const fields = Object.fromEntries([...config.matchAll(/^\s*(name|description|url|phone|email|address|postalCode|addressLocality):\s*'([^']*)'/gm)].map((match) => [match[1], match[2]]));
 if (Object.keys(fields).length !== 8) throw new Error('Nie udało się odczytać danych podstawowych z src/config/site.ts');
+const phoneDigits = fields.phone.replace(/\D/g, '');
+const telephone = phoneDigits.length === 9 ? `+48${phoneDigits}` : `+${phoneDigits.replace(/^00/, '')}`;
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'LodgingBusiness',
   name: fields.name,
   description: fields.description,
   url: fields.url,
-  telephone: `+48${fields.phone.replace(/\D/g, '')}`,
+  telephone,
   email: fields.email,
   address: { '@type': 'PostalAddress', streetAddress: fields.address, postalCode: fields.postalCode, addressLocality: fields.addressLocality, addressRegion: 'podlaskie', addressCountry: 'PL' },
   amenityFeature: ['Sauna', 'Bania', 'Rowery', 'Plac zabaw', 'Basen', 'Grill gazowy'].map((name) => ({ '@type': 'LocationFeatureSpecification', name, value: true })),
 }).replaceAll('<', '\\u003c');
 
-const pageUrl = new URL('index.html', dist);
-const page = await readFile(pageUrl, 'utf8');
-if (!page.includes('__JSON_LD__')) throw new Error('Nie znaleziono miejsca JSON-LD w dist/index.html');
-const finalPage = page.replace('__JSON_LD__', jsonLd);
-await writeFile(pageUrl, finalPage);
+async function findHtmlPages(directory, prefix = '') {
+  const pages = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const relative = `${prefix}${entry.name}`;
+    if (entry.isDirectory()) pages.push(...await findHtmlPages(new URL(`${entry.name}/`, directory), `${relative}/`));
+    else if (entry.isFile() && entry.name.endsWith('.html')) pages.push(relative);
+  }
+  return pages.sort();
+}
+const htmlPages = await findHtmlPages(dist);
+if (!htmlPages.includes('index.html')) throw new Error('Brak strony głównej dist/index.html');
 
 // Wspólne metadane są takie same na każdej stronie, więc JSON-LD z index.html
 // stanowi ten sam blok w każdej podstronie.
 const digest = createHash('sha256').update(jsonLd).digest('base64');
-for (const relative of ['404.html', 'galeria/index.html', 'kontakt/index.html', 'o-nas/index.html', 'polityka-prywatnosci/index.html']) {
+for (const relative of htmlPages) {
   const path = new URL(relative, dist);
   const html = await readFile(path, 'utf8');
   if (!html.includes('__JSON_LD__')) throw new Error(`Nie znaleziono miejsca JSON-LD w dist/${relative}`);
@@ -48,10 +56,9 @@ const robots = await readFile(robotsPath, 'utf8');
 await writeFile(robotsPath, robots.replaceAll('__SITE_URL__', fields.url));
 
 const localAssets = new Set(['index.html', '404.html', 'scripts/site.js', 'favicon.svg', 'robots.txt', 'sitemap-index.xml', 'sitemap-0.xml', '.well-known/security.txt']);
-const htmlPages = ['index.html', '404.html', 'galeria/index.html', 'kontakt/index.html', 'o-nas/index.html', 'polityka-prywatnosci/index.html'];
 for (const relative of htmlPages) {
   const path = new URL(relative, dist);
-  const html = relative === 'index.html' ? finalPage : await readFile(path, 'utf8');
+  const html = await readFile(path, 'utf8');
   const scriptTags = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
   for (const [, attributes, body] of scriptTags) {
     if (!/\bsrc=/.test(attributes) && !/\btype="application\/ld\+json"/.test(attributes)) {

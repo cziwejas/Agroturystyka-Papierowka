@@ -2,39 +2,159 @@
 import { Image } from 'astro:assets';
 import outside from '../assets/img/zewnatrz.jpg';
 import gazebo from '../assets/img/altana.jpg';
+import gazebo1 from '../assets/img/altana1.jpg';
 import living from '../assets/img/salon.jpg';
 import entry from '../assets/img/wnetrze.jpg';
 import fireplace from '../assets/img/Papierówka_015.jpg';
 import lounge from '../assets/img/Papierówka_022.jpg';
 import veranda from '../assets/img/Papierówka_045.jpg';
-import gardenGazebo from '../assets/img/Papierówka_047.jpg';
-const pictures = [
-  { src: outside, alt: 'Dom agroturystyczny otoczony zielenią', title: 'Dom i okolica' },
-  { src: gazebo, alt: 'Drewniana altana z miejscem do wypoczynku', title: 'Altana' },
-  { src: living, alt: 'Przytulny salon z drewnianymi elementami', title: 'Wnętrza' },
-  { src: entry, alt: 'Drewniane wnętrze domu', title: 'Domowe ciepło' },
-  { src: fireplace, alt: 'Rozpalony kominek i gry planszowe przygotowane dla gości', title: 'Kominek i gry' },
-  { src: lounge, alt: 'Salon z narożną sofą, fotelami i schodami na piętro', title: 'Salon' },
-  { src: veranda, alt: 'Zadaszona weranda z drewnianym stołem i kolorowymi lampkami', title: 'Weranda' },
-  { src: gardenGazebo, alt: 'Drewniana altana ogrodowa ze stołem i grillem', title: 'Altana ogrodowa' },
+
+const sections = [
+  {
+    id: 'zewnetrze',
+    label: 'Zewnętrze',
+    eyebrow: 'Dom i otoczenie',
+    description: 'Przestronny dom otoczony zielenią, z ogrodem i miejscem na wspólny wypoczynek na świeżym powietrzu.',
+    photos: [
+      { src: outside, alt: 'Dom agroturystyczny otoczony zielenią', title: 'Dom' },
+      { src: gazebo, alt: 'Drewniana altana z miejscem do wypoczynku', title: 'Altana' },
+      { src: gazebo1, alt: 'Altana ogrodowa widziana z boku', title: 'Altana ogrodowa' },
+    ],
+  },
+  {
+    id: 'wnetrza',
+    label: 'Wnętrza',
+    eyebrow: 'Środek domu',
+    description: 'Przytulne, przestronne wnętrza z kominkiem, dużym salonem i wszystkim, czego potrzeba do wspólnego wypoczynku.',
+    photos: [
+      { src: lounge, alt: 'Salon z narożną sofą, fotelami i schodami na piętro', title: 'Salon' },
+      { src: living, alt: 'Przytulny salon z drewnianymi elementami', title: 'Wnętrze' },
+      { src: entry, alt: 'Drewniane wnętrze domu', title: 'Domowe ciepło' },
+      { src: fireplace, alt: 'Rozpalony kominek i gry planszowe przygotowane dla gości', title: 'Kominek i gry' },
+    ],
+  },
+  {
+    id: 'ogrod',
+    label: 'Ogród i relaks',
+    eyebrow: 'Na zewnątrz',
+    description: 'Zadaszona weranda i strefa relaksu — idealne miejsca na wspólne chwile o każdej porze roku.',
+    photos: [
+      { src: veranda, alt: 'Zadaszona weranda z drewnianym stołem i kolorowymi lampkami', title: 'Weranda' },
+    ],
+  },
 ];
 ---
-<div class="gallery" aria-label="Zdjęcia Papierówki">{pictures.map((picture, index) => <a class:list={['tile', { 'tile--featured': index === 0 }]} href={picture.src.src} data-lightbox data-alt={picture.alt} data-caption={picture.title} aria-label={`${picture.title} — otwórz zdjęcie`}><Image src={picture.src} alt={picture.alt} widths={[480, 720, 960, 1200]} sizes="(max-width: 560px) 100vw, (max-width: 850px) 50vw, 25vw" format="webp" loading="lazy"/><span><small>{String(index + 1).padStart(2, '0')} <i aria-hidden="true">/</i> {String(pictures.length).padStart(2, '0')}</small><strong>{picture.title}</strong></span></a>)}</div>
-<dialog id="lightbox" aria-label="Podgląd zdjęcia"><button class="close" type="button" data-close aria-label="Zamknij podgląd">×</button><button class="previous" type="button" data-previous aria-label="Poprzedni obraz">‹</button><figure><img src="" alt=""/><figcaption></figcaption></figure><button class="next" type="button" data-next aria-label="Następny obraz">›</button></dialog>
+
+<div class="gallery-root" aria-label="Galeria zdjęć Papierówki">
+  <nav class="gallery-nav" aria-label="Sekcje galerii">
+    {sections.map(s => (
+      <a class="gallery-nav-link" href={`#${s.id}`}>{s.label}</a>
+    ))}
+  </nav>
+
+  {sections.map((section) => (
+    <section class="gallery-section" id={section.id} aria-labelledby={`${section.id}-heading`}>
+      <div class="gallery-section-header">
+        <span class="eyebrow">{section.eyebrow}</span>
+        <h2 id={`${section.id}-heading`}>{section.label}</h2>
+        <p>{section.description}</p>
+      </div>
+      <div class:list={['gallery', `gallery--${section.photos.length}`]} aria-label={`Zdjęcia: ${section.label}`}>
+        {section.photos.map((photo) => (
+          <a
+            class:list={['tile', { 'tile--featured': section.photos.indexOf(photo) === 0 && section.photos.length >= 3 }]}
+            href={photo.src.src}
+            data-lightbox
+            data-alt={photo.alt}
+            data-caption={photo.title}
+            aria-label={`${photo.title} — otwórz zdjęcie`}
+          >
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              widths={[480, 720, 960, 1280]}
+              sizes="(max-width: 560px) 100vw, (max-width: 850px) 50vw, 33vw"
+              format="webp"
+              loading="lazy"
+            />
+            <span class="tile-caption">
+              <strong>{photo.title}</strong>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+</div>
+
+<dialog id="lightbox" aria-label="Podgląd zdjęcia">
+  <button class="close" type="button" data-close aria-label="Zamknij podgląd">×</button>
+  <button class="previous" type="button" data-previous aria-label="Poprzedni obraz">‹</button>
+  <figure>
+    <img src="" alt="" />
+    <figcaption></figcaption>
+  </figure>
+  <button class="next" type="button" data-next aria-label="Następny obraz">›</button>
+</dialog>
+
 <style>
-  .gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(150px,17vw,230px);grid-auto-flow:dense;gap:var(--space-4)}
-  .tile{position:relative;display:block;min-width:0;overflow:hidden;grid-column:span 1;grid-row:span 1;border-radius:var(--radius-card);background:var(--color-soft);isolation:isolate}
-  .tile--featured{grid-column:span 2;grid-row:span 2}
-  .tile:nth-child(2),.tile:nth-child(7),.tile:nth-child(8){grid-column:span 2}
+  /* Nav */
+  .gallery-nav{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-10)}
+  .gallery-nav-link{display:inline-flex;min-height:40px;align-items:center;padding:var(--space-2) var(--space-5);border:1px solid var(--color-line);border-radius:var(--radius-pill);background:var(--color-white);color:var(--color-ink);font-size:.88rem;font-weight:600;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+  .gallery-nav-link:hover{background:var(--color-soft);border-color:var(--color-forest);transform:translateY(-1px)}
+
+  /* Section */
+  .gallery-section{margin-bottom:var(--space-16)}
+  .gallery-section:last-child{margin-bottom:0}
+  .gallery-section-header{margin-bottom:var(--space-6)}
+  .gallery-section-header h2{margin:var(--space-2) 0;font-size:clamp(1.5rem,3vw,2rem)}
+  .gallery-section-header p{margin:0;color:var(--color-muted);max-width:60ch}
+
+  /* Grid — 1 photo */
+  .gallery--1{display:grid;grid-template-columns:1fr;gap:var(--space-4);grid-auto-rows:clamp(260px,36vw,480px)}
+
+  /* Grid — 2 photos */
+  .gallery--2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);grid-auto-rows:clamp(200px,28vw,380px)}
+
+  /* Grid — 3 photos */
+  .gallery--3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);grid-auto-rows:clamp(180px,22vw,300px)}
+  .gallery--3 .tile--featured{grid-column:span 2;grid-row:span 2}
+
+  /* Grid — 4 photos */
+  .gallery--4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);grid-auto-rows:clamp(180px,22vw,300px)}
+
+  /* Tiles */
+  .tile{position:relative;display:block;overflow:hidden;border-radius:var(--radius-card);background:var(--color-soft);isolation:isolate}
   .tile img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
-  .tile::after{position:absolute;inset:35% 0 0;z-index:0;background:linear-gradient(transparent,var(--color-gallery-overlay));content:'';pointer-events:none}
-  .tile:hover img,.tile:focus-visible img{transform:scale(1.035)}
-  .tile span{position:absolute;right:0;bottom:0;left:0;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-1);padding:var(--space-6);color:var(--color-white)}
-  .tile span small{font-size:.72rem;font-weight:600;letter-spacing:.12em;opacity:.82}.tile span i{padding-inline:var(--space-1);font-style:normal;opacity:.7}.tile span strong{font-family:'Lora',Georgia,serif;font-size:clamp(1.05rem,1.7vw,1.4rem);font-weight:600;line-height:1.2}
+  .tile::after{position:absolute;inset:40% 0 0;z-index:0;background:linear-gradient(transparent,var(--color-gallery-overlay));content:'';pointer-events:none}
+  .tile:hover img,.tile:focus-visible img{transform:scale(1.04)}
+  .tile-caption{position:absolute;right:0;bottom:0;left:0;z-index:1;padding:var(--space-5) var(--space-5) var(--space-4)}
+  .tile-caption strong{display:block;color:var(--color-white);font-family:'Lora',Georgia,serif;font-size:clamp(1rem,1.6vw,1.3rem);font-weight:600;line-height:1.2}
+
+  /* Lightbox */
   dialog{position:fixed;inset:0;max-width:min(94vw,1000px);max-height:92vh;margin:auto;padding:var(--space-12) var(--space-12) var(--space-6);border:0;border-radius:var(--radius-card);background:var(--color-footer);color:var(--color-white)}
-  dialog::backdrop{background:var(--color-dialog-backdrop)}dialog figure{margin:0}dialog img{display:block;max-width:100%;max-height:72vh;margin:auto;object-fit:contain}figcaption{padding-top:var(--space-3);text-align:center}
-  .close,.previous,.next{position:absolute;display:grid;width:46px;height:46px;place-items:center;border:1px solid var(--color-line);border-radius:50%;background:var(--color-white);color:var(--color-ink);font-size:1.8rem;cursor:pointer}
-  .close{top:var(--space-3);right:var(--space-3)}.previous,.next{top:50%;transform:translateY(-50%)}.previous{left:var(--space-3)}.next{right:var(--space-3)}
-  @media(max-width:850px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(160px,28vw,230px)}.tile--featured{grid-column:span 2;grid-row:span 1}.tile:nth-child(2),.tile:nth-child(7),.tile:nth-child(8){grid-column:span 1}}
-  @media(max-width:560px){.gallery{grid-template-columns:1fr;grid-auto-rows:auto;gap:var(--space-4)}.tile,.tile--featured{grid-column:span 1;grid-row:span 1;aspect-ratio:3/2}.tile span{padding:var(--space-5)}.tile span strong{font-size:1.25rem}dialog{padding:var(--space-12) var(--space-10) var(--space-5)}.previous{left:var(--space-1)}.next{right:var(--space-1)}}
+  dialog::backdrop{background:var(--color-dialog-backdrop)}
+  dialog figure{margin:0}
+  dialog img{display:block;max-width:100%;max-height:72vh;margin:auto;object-fit:contain}
+  figcaption{padding-top:var(--space-3);text-align:center;color:var(--color-footer-muted)}
+  .close,.previous,.next{position:absolute;display:grid;width:46px;height:46px;place-items:center;border:1px solid var(--color-line);border-radius:50%;background:var(--color-white);color:var(--color-ink);font-size:1.8rem;cursor:pointer;transition:background .2s}
+  .close:hover,.previous:hover,.next:hover{background:var(--color-soft)}
+  .close{top:var(--space-3);right:var(--space-3)}
+  .previous,.next{top:50%;transform:translateY(-50%)}
+  .previous{left:var(--space-3)}
+  .next{right:var(--space-3)}
+
+  /* Responsive */
+  @media(max-width:850px){
+    .gallery--3{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .gallery--3 .tile--featured{grid-column:span 2;grid-row:span 1}
+  }
+  @media(max-width:560px){
+    .gallery--2,.gallery--3,.gallery--4{grid-template-columns:1fr;grid-auto-rows:auto}
+    .tile,.tile--featured{grid-column:span 1!important;grid-row:span 1!important;aspect-ratio:4/3}
+    .tile-caption{padding:var(--space-4)}
+    dialog{padding:var(--space-12) var(--space-10) var(--space-5)}
+    .previous{left:var(--space-1)}
+    .next{right:var(--space-1)}
+  }
 </style>

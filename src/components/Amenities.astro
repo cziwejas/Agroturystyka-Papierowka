@@ -1,6 +1,32 @@
 ---
 import FeatureCard from './FeatureCard.astro';
 import { amenities } from '../config/site';
+import amenitiesScriptUrl from '../scripts/amenities.js?url&no-inline';
 ---
-<section class="section amenities"><div class="container"><div class="section-title"><span class="eyebrow">Wszystko na miejscu</span><h2>Wypoczynek po swojemu</h2><p>Przestrzeń dla bliskich, chwile relaksu i podlaska przyroda tuż obok.</p></div><div class="grid">{amenities.map((item) => <FeatureCard {...item} />)}</div></div></section>
-<style>.amenities{background:var(--color-paper)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5)}@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.grid{grid-template-columns:1fr}}</style>
+<section class="section amenities"><div class="container"><div class="section-title"><span class="eyebrow">Wszystko na miejscu</span><h2>Wypoczynek po swojemu</h2><p>Przestrzeń dla bliskich, chwile relaksu i podlaska przyroda tuż obok.</p></div>
+  <amenities-list>
+    <div class="grid" id="home-amenities">
+      {amenities.map((item, index) => <div class:list={['feature-item', { 'is-extra': index >= 4 }]}><FeatureCard {...item} /></div>)}
+    </div>
+    {amenities.length > 4 && <button class="amenities-toggle" type="button" aria-expanded="false" aria-controls="home-amenities" hidden>
+      <span>Pokaż więcej udogodnień</span>
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+    </button>}
+  </amenities-list>
+</div></section>
+<script is:inline src={amenitiesScriptUrl} defer></script>
+<style>
+  .amenities{background:var(--color-paper)}
+  amenities-list{display:block}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5)}
+  .feature-item{min-width:0}
+  .amenities-toggle{display:none}
+  @media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:650px){
+    amenities-list[data-expanded="false"] .is-extra{display:none}
+    .amenities-toggle:not([hidden]){display:flex;min-height:48px;align-items:center;justify-content:center;gap:var(--space-3);margin:var(--space-6) auto 0;padding:var(--space-3) var(--space-5);border:1px solid var(--color-line);border-radius:var(--radius-pill);background:var(--color-white);color:var(--color-forest-dark);font:inherit;font-weight:700;cursor:pointer}
+    .amenities-toggle:hover{background:var(--color-soft)}
+    .amenities-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
+  }
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style>

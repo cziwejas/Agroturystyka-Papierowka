@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Gallery from '../components/Gallery.astro';
+import BookingCta from '../components/BookingCta.astro';
 ---
 <BaseLayout title="Galeria — Papierówka" description="Zobacz dom i otoczenie agroturystyki Papierówka w miejscowości Wasilkowo.">
-  <section class="page-hero"><div class="container"><span class="eyebrow">Zajrzyj do środka</span><h1>Galeria</h1><p>Zobacz dom, jego wnętrza i miejsca do odpoczynku.</p></div></section>
+  <section class="page-hero"><div class="container"><span class="eyebrow">Zajrzyjcie do środka</span><h1>Galeria</h1><p>Zobaczcie dom, jego wnętrza i nasze miejsca do odpoczynku.</p></div></section>
   <section class="section"><div class="container"><Gallery /></div></section>
+  <BookingCta title="Podoba Wam się Papierówka?" />
 </BaseLayout>
-<style>.page-hero{padding-block:clamp(var(--space-12),8vw,var(--space-16));background:var(--color-soft) url('/img/forest-mist.svg') center/cover no-repeat}.page-hero h1{margin:var(--space-2) 0}.page-hero p{margin-bottom:0;color:var(--color-muted)}</style>

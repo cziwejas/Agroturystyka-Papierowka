@@ -1,0 +1,19 @@
+---
+import { site } from '../config/site';
+---
+<section class="section local-flavors" aria-labelledby="local-flavors-title">
+  <div class="container local-flavors-inner">
+    <span class="eyebrow">Z naszej kuchni</span>
+    <h2 id="local-flavors-title">Coś podlaskiego na spróbowanie</h2>
+    <p>{site.localFoodDescription}</p>
+    <a href="/kontakt/">Zapytajcie, co przygotowujemy</a>
+  </div>
+</section>
+<style>
+  .local-flavors{background:var(--color-paper)}
+  .local-flavors-inner{max-width:780px;text-align:center}
+  h2{margin:var(--space-2) 0 var(--space-4);font-size:clamp(1.75rem,4vw,2.5rem)}
+  p{margin:0 auto var(--space-4);color:var(--color-muted)}
+  a{display:inline-flex;min-height:44px;align-items:center;color:var(--color-cta);font-weight:700;text-underline-offset:4px}
+  a:hover{color:var(--color-cta-hover);text-decoration-thickness:2px}
+</style>
