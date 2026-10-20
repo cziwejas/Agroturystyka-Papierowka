@@ -1,0 +1,25 @@
+---
+import MessengerButton from './MessengerButton.astro';
+import { site } from '../config/site';
+---
+<nav class="contact-dock" aria-label="Szybki kontakt">
+  <div class="container dock-inner">
+    <a class="dock-phone" href={site.phoneHref}>
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+      <span>Zadzwoń</span>
+    </a>
+    <MessengerButton label="Facebook" />
+  </div>
+</nav>
+<style>
+  .contact-dock{display:none}
+  @media(max-width:700px){
+    .contact-dock{position:fixed;right:0;bottom:0;left:0;z-index:15;display:block;padding:var(--space-3) 0 calc(var(--space-3) + env(safe-area-inset-bottom));border-top:1px solid var(--color-line);background:var(--color-white)}
+    .dock-inner{display:grid;grid-template-columns:1fr 1.4fr;align-items:stretch;gap:var(--space-3)}
+    .dock-inner :global(.messenger-button){width:100%;padding-inline:var(--space-3)}
+    .dock-phone{display:flex;min-height:48px;align-items:center;justify-content:center;gap:var(--space-2);border:1px solid var(--color-line);border-radius:var(--radius-pill);color:var(--color-forest-dark);font-weight:700;text-decoration:none}
+    .dock-phone:hover{background:var(--color-soft)}
+    :global(body){padding-bottom:calc(var(--space-16) + var(--space-6) + env(safe-area-inset-bottom))}
+    :global(html){scroll-padding-bottom:calc(var(--space-16) + var(--space-6) + env(safe-area-inset-bottom))}
+  }
+</style>

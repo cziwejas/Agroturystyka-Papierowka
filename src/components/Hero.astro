@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import MessengerButton from './MessengerButton.astro';
 import outside from '../assets/img/zewnatrz.jpg';
 import gazebo from '../assets/img/altana1.jpg';
 ---
@@ -9,7 +10,7 @@ import gazebo from '../assets/img/altana1.jpg';
     <Image class="hero-slide" data-hero-slide src={gazebo} alt="Altana wypoczynkowa w ogrodzie" widths={[640, 960, 1280, 1600]} sizes="100vw" format="webp" loading="lazy" />
   </div>
   <div class="hero-shade"></div>
-  <div class="container hero-content"><span class="eyebrow">Wytchnienie na Podlasiu</span><h1>Papierówka</h1><p>Agroturystyka · okolice Puszczy Białowieskiej</p><a class="button" href="/kontakt/">Zarezerwuj pobyt <span aria-hidden="true">→</span></a></div>
+  <div class="container hero-content"><span class="eyebrow">Wytchnienie na Podlasiu</span><h1>Papierówka</h1><p>Dom na wyłączność dla 8–10 osób, kilometr od Puszczy Białowieskiej.</p><MessengerButton label="Zapytaj o termin na Facebooku" /></div>
   <div class="hero-controls">
     <div class="hero-dots" role="group" aria-label="Wybór zdjęcia">
       <button type="button" data-hero-dot aria-label="Zdjęcie 1" aria-current="true"></button>
@@ -29,12 +30,13 @@ import gazebo from '../assets/img/altana1.jpg';
   .hero-slide.is-active{opacity:1}
   .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,var(--color-hero-shade),var(--color-hero-shade-soft) 75%),linear-gradient(0deg,var(--color-hero-shade-bottom),transparent 50%);pointer-events:none}
   .hero::after{position:absolute;inset:auto 0 0;height:clamp(90px,14vw,180px);z-index:1;background:linear-gradient(to bottom,transparent,var(--color-white));content:'';pointer-events:none}
-  .hero-content{position:relative;z-index:2;padding-block:clamp(3.5rem,8vw,5rem)}.hero .eyebrow{color:var(--color-hero-eyebrow)}.hero p{font-size:clamp(1.05rem,2vw,1.35rem);margin:var(--space-4) 0 var(--space-8)}.hero .button{min-width:180px;background:var(--color-forest-dark)}.hero .button:hover{background:var(--color-forest)}
+  .hero-content{position:relative;z-index:2;padding-block:clamp(3.5rem,8vw,5rem)}.hero .eyebrow{color:var(--color-hero-eyebrow)}.hero p{max-width:44ch;font-size:clamp(1.05rem,2vw,1.35rem);margin:var(--space-4) 0 var(--space-8)}
   .hero-controls{display:none;position:absolute;right:max(var(--space-5),calc((100vw - var(--content-width))/2));bottom:var(--space-5);z-index:2;align-items:center;gap:var(--space-4)}
-  .js .hero-controls{display:flex}
-  .hero-dots{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3);border:1px solid var(--color-hero-control-border);border-radius:var(--radius-pill);background:var(--color-hero-control)}
-  .hero-dots button{width:10px;height:10px;padding:0;border:1px solid var(--color-hero-control-border);border-radius:50%;background:transparent;cursor:pointer;transition:background .2s ease,transform .2s ease}
-  .hero-dots button[aria-current="true"]{background:var(--color-white);border-color:var(--color-white);transform:scale(1.15)}
+  :global(.js) .hero-controls{display:flex}
+  .hero-dots{--hero-dot-target:2.75rem;--hero-dot-size:.625rem;display:flex;align-items:center;padding:0 var(--space-1);border:1px solid var(--color-hero-control-border);border-radius:var(--radius-pill);background:var(--color-hero-control)}
+  .hero-dots button{display:grid;width:var(--hero-dot-target);height:var(--hero-dot-target);place-items:center;padding:0;border:0;border-radius:var(--radius-pill);background:transparent;cursor:pointer}
+  .hero-dots button::before{display:block;width:var(--hero-dot-size);height:var(--hero-dot-size);border:1px solid var(--color-hero-control-border);border-radius:var(--radius-pill);background:transparent;content:'';transition:background .2s ease,transform .2s ease}
+  .hero-dots button[aria-current="true"]::before{background:var(--color-white);border-color:var(--color-white);transform:scale(1.15)}
   .hero-pause{display:grid;width:46px;height:46px;place-items:center;border:1px solid var(--color-hero-control-border);border-radius:50%;background:var(--color-hero-control);color:var(--color-white);cursor:pointer}
   .hero-pause .icon-play,.hero-pause[aria-pressed="true"] .icon-pause{display:none}
   .hero-pause[aria-pressed="true"] .icon-play{display:block}

@@ -1,0 +1,44 @@
+---
+import { site } from '../config/site';
+import reviewsScriptUrl from '../scripts/reviews-slider.js?url&no-inline';
+---
+<reviews-slider role="region" aria-roledescription="karuzela" aria-label="Opinie gości">
+  <div class="track" tabindex="0" aria-label="Opinie — przewijaj strzałkami" id="guest-reviews-track">
+    {site.reviews.map((review, index) => <blockquote role="group" aria-roledescription="slajd" aria-label={`${index + 1} z ${site.reviews.length}`}>
+      <span class="quote" aria-hidden="true">“</span>
+      <div class="review-rating" role="img" aria-label={`Ocena: ${review.rating} na 5 gwiazdek`}>
+        <span class="review-stars" aria-hidden="true">
+          {Array.from({ length: 5 }, (_, star) => <svg width="18" height="18" viewBox="0 0 24 24" fill={star < review.rating ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="m12 3 2.78 5.63 6.22.91-4.5 4.39 1.06 6.2L12 17.2l-5.56 2.93 1.06-6.2L3 9.54l6.22-.91L12 3Z" /></svg>)}
+        </span>
+        <span aria-hidden="true">{review.rating}/5</span>
+      </div>
+      <p>{review.text}</p>
+      <cite>{review.author}<span>{review.date}</span></cite>
+    </blockquote>)}
+  </div>
+  <div class="controls" hidden>
+    <button type="button" data-prev aria-label="Poprzednia opinia" aria-controls="guest-reviews-track">←</button>
+    <span class="position" aria-live="polite" aria-atomic="true">1 / {site.reviews.length}</span>
+    <button type="button" data-next aria-label="Następna opinia" aria-controls="guest-reviews-track">→</button>
+  </div>
+</reviews-slider>
+<script is:inline src={reviewsScriptUrl} defer></script>
+<style>
+  reviews-slider{display:block;--review-edge:34.5%;margin-inline:auto}
+  .track{position:relative;display:flex;gap:var(--space-4);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-block:var(--space-4);padding-inline:var(--review-edge);scroll-padding-inline:var(--review-edge)}
+  .track::-webkit-scrollbar{display:none}
+  blockquote{box-sizing:border-box;display:flex;flex:0 0 100%;min-width:0;flex-direction:column;align-items:center;margin:0;padding:clamp(var(--space-5),3vw,var(--space-8));border:1px solid var(--color-line);border-radius:var(--radius-card);background:var(--color-white);text-align:center;scroll-snap-align:center}
+  .track[data-enhanced] blockquote{opacity:.2;transform:scale(.9);transition:opacity .25s ease,transform .25s ease}
+  .track[data-enhanced] blockquote.is-near{opacity:.48;transform:scale(.95)}
+  .track[data-enhanced] blockquote.is-active{opacity:1;transform:scale(1);box-shadow:var(--shadow-card)}
+  .quote{color:var(--color-forest);font:600 3rem 'Lora',Georgia,serif;line-height:1}
+  .review-rating{display:flex;align-items:center;gap:var(--space-2);margin:var(--space-2) 0 var(--space-3);color:var(--color-muted);font-size:.84rem;font-weight:700;line-height:1}
+  .review-stars{--color-rating-gold:#a66e00;display:flex;gap:var(--space-1);color:var(--color-rating-gold)}
+  p{flex:1;margin:var(--space-2) 0 var(--space-6);color:var(--color-ink);font-size:1rem;line-height:1.7;overflow-wrap:anywhere}
+  cite{color:var(--color-ink);font-style:normal;font-weight:700}cite span{display:block;margin-top:var(--space-1);color:var(--color-muted);font-size:.84rem;font-weight:500}
+  .controls{display:flex;justify-content:center;align-items:center;gap:var(--space-6);margin-top:var(--space-5)}.controls[hidden]{display:none}
+  button{width:48px;height:48px;border:1px solid var(--color-line);border-radius:var(--radius-pill);background:var(--color-white);color:var(--color-forest);font-size:1.5rem;cursor:pointer}button:hover:enabled{background:var(--color-soft)}button:disabled{opacity:.4;cursor:default}
+  .position{min-width:5ch;color:var(--color-muted);text-align:center;font-variant-numeric:tabular-nums}
+  @media(max-width:650px){reviews-slider{--review-edge:12%}blockquote{flex-basis:100%}}
+  @media(prefers-reduced-motion:reduce){.track[data-enhanced] blockquote{transition:none}}
+</style>

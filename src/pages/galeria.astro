@@ -1,13 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Gallery from '../components/Gallery.astro';
+import BookingCta from '../components/BookingCta.astro';
 ---
 <BaseLayout title="Galeria — Papierówka" description="Zobacz dom i otoczenie agroturystyki Papierówka w miejscowości Wasilkowo.">
-  <section class="page-hero"><div class="container"><span class="eyebrow">Zajrzyj do środka</span><h1>Galeria</h1><p>Zobacz dom, jego wnętrza i miejsca do odpoczynku.</p></div></section>
+  <section class="page-hero"><div class="container"><span class="eyebrow">Zajrzyjcie do środka</span><h1>Galeria</h1><p>Zobaczcie dom, jego wnętrza i nasze miejsca do odpoczynku.</p></div></section>
   <section class="section"><div class="container"><Gallery /></div></section>
-  <section class="cta"><div class="container cta-inner"><div><span class="eyebrow">Podoba się?</span><h2>Zarezerwuj swój pobyt.</h2><p>Rezerwacje przyjmujemy telefonicznie i e-mailem.</p></div><div class="cta-buttons"><a class="button button--light" href="/kontakt/">Skontaktuj się</a><a class="button button--outline" href="/oferta/">Sprawdź ceny</a></div></div></section>
+  <BookingCta title="Podoba Wam się Papierówka?" />
 </BaseLayout>
-<style>
-  .cta{padding:var(--space-12) 0;background:var(--color-forest);color:var(--color-white)}.cta .eyebrow{color:var(--color-muted-on-forest)}.cta h2{margin:var(--space-1) 0;font-size:clamp(1.8rem,4vw,2.5rem)}.cta p{margin:0;color:var(--color-muted-on-forest)}.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-8)}.cta-buttons{display:flex;flex-shrink:0;gap:var(--space-4)}.button--outline{background:transparent;border:2px solid var(--color-white);color:var(--color-white);box-shadow:none}.button--outline:hover{background:#ffffff20;transform:translateY(-2px)}
-  @media(max-width:650px){.cta-inner{align-items:flex-start;flex-direction:column}.cta-buttons{flex-direction:column;width:100%}.cta-buttons .button{width:100%;justify-content:center}}
-</style>
