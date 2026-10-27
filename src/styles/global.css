@@ -65,7 +65,7 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 94px; }
 body { margin: 0; min-width: 320px; line-height: 1.65; }
 a { color: inherit; }
 a:focus-visible,
@@ -93,10 +93,39 @@ p { max-width: 70ch; margin: var(--space-2) 0 var(--space-4); }
 .page-hero h1 { margin: var(--space-2) 0; }
 .page-hero p { margin-bottom: 0; color: var(--color-muted); }
 
+/* Only off-screen content is prepared for reveal by site.js. */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s cubic-bezier(.22, 1, .36, 1), transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+.scroll-reveal.is-visible,
+.scroll-reveal:focus-within { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Keep ordinary document navigation, browser history and page scripts. */
+  @view-transition { navigation: auto; }
+
+  ::view-transition-old(root) {
+    animation: page-fade-out .24s ease both;
+  }
+  ::view-transition-new(root) {
+    animation: page-fade-in .32s ease both;
+  }
+}
+
+@keyframes page-fade-out { to { opacity: 0; } }
+@keyframes page-fade-in { from { opacity: 0; } }
+
+@media (max-width: 700px) {
+  html { scroll-padding-top: 88px; }
+}
+
 @media (max-width: 480px) {
   .container { width: min(var(--content-width), calc(100% - 2 * var(--space-4))); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+  .scroll-reveal { opacity: 1; transform: none; }
 }
