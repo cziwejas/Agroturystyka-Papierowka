@@ -6,8 +6,8 @@ import gazebo from '../assets/img/altana1.jpg';
 ---
 <section class="hero" aria-label="Papierówka wśród podlaskiej przyrody">
   <div class="hero-slides" aria-hidden="true">
-    <Image class="hero-slide is-active" data-hero-slide src={outside} alt="Dom agroturystyczny pośród zieleni" widths={[640, 960, 1280, 1600]} sizes="100vw" format="webp" loading="eager" fetchpriority="high" />
-    <Image class="hero-slide" data-hero-slide src={gazebo} alt="Altana wypoczynkowa w ogrodzie" widths={[640, 960, 1280, 1600]} sizes="100vw" format="webp" loading="lazy" />
+    <Image class="hero-slide hero-slide--outside is-active" data-hero-slide src={outside} alt="Dom agroturystyczny pośród zieleni" widths={[640, 960, 1280, 1600, 1920, 2560]} sizes="100vw" format="webp" quality={90} loading="eager" fetchpriority="high" />
+    <Image class="hero-slide" data-hero-slide src={gazebo} alt="Altana wypoczynkowa w ogrodzie" widths={[640, 960, 1280, 1600, 1920, 2560]} sizes="100vw" format="webp" quality={90} loading="eager" />
   </div>
   <div class="hero-shade"></div>
   <div class="container hero-content"><span class="eyebrow">Wytchnienie na Podlasiu</span><h1>Papierówka</h1><p>Dom na wyłączność dla 8–10 osób, kilometr od Puszczy Białowieskiej.</p><MessengerButton label="Zapytaj o termin na Facebooku" /></div>
@@ -26,7 +26,7 @@ import gazebo from '../assets/img/altana1.jpg';
   .hero{position:relative;min-height:590px;height:min(86vh,900px);display:grid;align-items:center;overflow:hidden;background:var(--color-forest-dark);color:var(--color-white)}
   .hero-slides,.hero-slide{position:absolute;inset:0;width:100%;height:100%}
   .hero-slide{object-fit:cover;opacity:0;transition:opacity 1.25s ease}
-  .hero-slide:first-child{object-position:50% 30%}
+  .hero-slide--outside{object-position:50% 30%}
   .hero-slide.is-active{opacity:1}
   .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,var(--color-hero-shade),var(--color-hero-shade-soft) 75%),linear-gradient(0deg,var(--color-hero-shade-bottom),transparent 50%);pointer-events:none}
   .hero::after{position:absolute;inset:auto 0 0;height:clamp(90px,14vw,180px);z-index:1;background:linear-gradient(to bottom,transparent,var(--color-white));content:'';pointer-events:none}
