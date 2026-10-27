@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import outside from '../assets/img/zewnatrz.jpg';
 import gazebo from '../assets/img/altana.jpg';
 import gazebo1 from '../assets/img/altana1.jpg';
@@ -8,6 +8,24 @@ import entry from '../assets/img/wnetrze.jpg';
 import fireplace from '../assets/img/Papierówka_015.jpg';
 import lounge from '../assets/img/Papierówka_022.jpg';
 import veranda from '../assets/img/Papierówka_045.jpg';
+import houseSpring from '../assets/img/new_imgs/9AGnXCNt.jpg';
+import houseFront from '../assets/img/new_imgs/NLGm7_T-.jpg';
+import cosyDetails from '../assets/img/new_imgs/ZsaI_v2N.jpg';
+import pool from '../assets/img/new_imgs/8grxGd3g.jpg';
+import apples from '../assets/img/new_imgs/XdRRhm98.jpg';
+import playground from '../assets/img/new_imgs/au7F72FT.jpg';
+import autumnTrail from '../assets/img/new_imgs/W6Vv7SrF.jpg';
+import greenTrail from '../assets/img/new_imgs/chf_cCke.jpg';
+import forestStream from '../assets/img/new_imgs/7_pSdH2p.jpg';
+import forestCanopy from '../assets/img/new_imgs/AVqgzruh.jpg';
+import cycling from '../assets/img/new_imgs/XH3dQZHb.jpg';
+import morningRoad from '../assets/img/new_imgs/vqGFiQqs.jpg';
+import bisonHerd from '../assets/img/new_imgs/56GxlSpD.jpg';
+import winterBison from '../assets/img/new_imgs/i0O3c6C2.jpg';
+import deer from '../assets/img/new_imgs/LxWAZ97s.jpg';
+import sunset from '../assets/img/new_imgs/YfUEWgGU.jpg';
+import winterRoad from '../assets/img/new_imgs/Hwn3MNkR.jpg';
+import frostyTree from '../assets/img/new_imgs/vcK8xM3x.jpg';
 
 const sections = [
   {
@@ -16,6 +34,8 @@ const sections = [
     eyebrow: 'Dom i otoczenie',
     description: 'Przestronny dom otoczony zielenią, z ogrodem i miejscem na wspólny wypoczynek na świeżym powietrzu.',
     photos: [
+      { src: houseFront, alt: 'Wejście na posesję Papierówki z niebieskimi i zielonymi okiennicami', title: 'Witajcie w Papierówce' },
+      { src: houseSpring, alt: 'Dom z balkonem i niebieskimi okiennicami za kwitnącym drzewem', title: 'Wiosna przy domu' },
       { src: outside, alt: 'Dom agroturystyczny otoczony zielenią', title: 'Dom' },
       { src: gazebo, alt: 'Drewniana altana z miejscem do wypoczynku', title: 'Altana' },
       { src: gazebo1, alt: 'Altana ogrodowa widziana z boku', title: 'Altana ogrodowa' },
@@ -31,18 +51,57 @@ const sections = [
       { src: living, alt: 'Przytulny salon z drewnianymi elementami', title: 'Wnętrze' },
       { src: entry, alt: 'Drewniane wnętrze domu', title: 'Domowe ciepło' },
       { src: fireplace, alt: 'Rozpalony kominek i gry planszowe przygotowane dla gości', title: 'Kominek i gry' },
+      { src: cosyDetails, alt: 'Kwiaty i słodycze na stole, w tle rozpalony piecyk', title: 'Przytulne detale' },
     ],
   },
   {
     id: 'ogrod',
     label: 'Ogród i relaks',
     eyebrow: 'Na zewnątrz',
-    description: 'Zadaszona weranda i strefa relaksu — idealne miejsca na wspólne chwile o każdej porze roku.',
+    description: 'Zadaszona weranda, ogród, plac zabaw i basen w sezonie — miejsca na wspólny odpoczynek i zabawę.',
     photos: [
       { src: veranda, alt: 'Zadaszona weranda z drewnianym stołem i kolorowymi lampkami', title: 'Weranda' },
+      { src: pool, alt: 'Okrągły basen ogrodowy, a za nim kolorowy domek ze zjeżdżalnią', title: 'Basen w sezonie' },
+      { src: playground, alt: 'Kolorowy drewniany domek dla dzieci ze schodkami i niebieską zjeżdżalnią', title: 'Dla najmłodszych' },
+      { src: apples, alt: 'Zielone jabłka na gałęzi, w tle ogród z basenem i placem zabaw', title: 'Lato w ogrodzie' },
+    ],
+  },
+  {
+    id: 'okolica',
+    label: 'Okolica',
+    eyebrow: 'Blisko natury',
+    description: 'Leśne ścieżki, rowerowe wyprawy, dzikie zwierzęta i krajobrazy zmieniające się wraz z porami roku.',
+    photos: [
+      { src: autumnTrail, alt: 'Leśna droga pośród drzew o złotych i pomarańczowych liściach', title: 'Jesienne spacery' },
+      { src: greenTrail, alt: 'Wąska ścieżka w lesie pełnym zielonych liści i paproci', title: 'Zielone ścieżki' },
+      { src: forestStream, alt: 'Leśny strumień otoczony bujną zielenią w słoneczny dzień', title: 'Nad strumieniem' },
+      { src: forestCanopy, alt: 'Wysoki pień porośnięty mchem i korony drzew widziane od dołu', title: 'Spójrzcie w górę' },
+      { src: cycling, alt: 'Rowery przy leśnej drodze otoczonej zielonymi drzewami', title: 'Na dwóch kółkach' },
+      { src: morningRoad, alt: 'Promienie słońca przebijające przez mgłę nad leśną drogą', title: 'Światło o poranku' },
+      { src: bisonHerd, alt: 'Stado żubrów stojących blisko siebie na łące', title: 'Żubry' },
+      { src: winterBison, alt: 'Żubr z pyskiem i sierścią pokrytymi śniegiem', title: 'Zimowe spotkanie' },
+      { src: deer, alt: 'Jeleń z porożem wśród zielonych roślin na skraju lasu', title: 'Leśni mieszkańcy' },
+      { src: sunset, alt: 'Zachodzące słońce widoczne między gałęziami drzewa iglastego', title: 'Spokojny wieczór' },
+      { src: winterRoad, alt: 'Ośnieżona droga przez las w niebieskim świetle zmierzchu', title: 'Zima w lesie' },
+      { src: frostyTree, alt: 'Drzewo pokryte szronem na zaśnieżonym polu pod błękitnym niebem', title: 'Krajobraz w bieli' },
     ],
   },
 ];
+
+// Full-size previews also use WebP; retain the supplied JPEGs as source files.
+const gallerySections = await Promise.all(sections.map(async (section) => ({
+  ...section,
+  photos: await Promise.all(section.photos.map(async (photo) => ({
+    ...photo,
+    preview: await getImage({
+      src: photo.src,
+      width: Math.round(photo.src.width * Math.min(1, 1600 / Math.max(photo.src.width, photo.src.height))),
+      format: 'webp',
+      quality: 80,
+    }),
+    widths: [...new Set([480, 720, 960, 1280, photo.src.width].filter((width) => width <= Math.min(photo.src.width, 1280)))],
+  }))),
+})));
 ---
 
 <div class="gallery-root" aria-label="Galeria zdjęć Papierówki">
@@ -52,18 +111,18 @@ const sections = [
     ))}
   </nav>
 
-  {sections.map((section) => (
+  {gallerySections.map((section) => (
     <section class="gallery-section" id={section.id} aria-labelledby={`${section.id}-heading`}>
       <div class="gallery-section-header">
         <span class="eyebrow">{section.eyebrow}</span>
         <h2 id={`${section.id}-heading`}>{section.label}</h2>
         <p>{section.description}</p>
       </div>
-      <div class:list={['gallery', `gallery--${section.photos.length}`]} aria-label={`Zdjęcia: ${section.label}`}>
-        {section.photos.map((photo) => (
+      <div class:list={['gallery', `gallery--${section.photos.length}`, { 'gallery--many': section.photos.length > 4, 'gallery--garden': section.id === 'ogrod' }]} aria-label={`Zdjęcia: ${section.label}`}>
+        {section.photos.map((photo, index) => (
           <a
-            class:list={['tile', { 'tile--featured': section.photos.indexOf(photo) === 0 && section.photos.length >= 3 }]}
-            href={photo.src.src}
+            class:list={['tile', { 'tile--featured': index === 0 && section.photos.length === 3, 'tile--full-frame': section.id === 'ogrod' && index > 0 }]}
+            href={photo.preview.src}
             data-lightbox
             data-alt={photo.alt}
             data-caption={photo.title}
@@ -72,9 +131,19 @@ const sections = [
             <Image
               src={photo.src}
               alt={photo.alt}
-              widths={[480, 720, 960, 1280]}
-              sizes="(max-width: 560px) 100vw, (max-width: 850px) 50vw, 33vw"
+              width={Math.min(photo.src.width, 1280)}
+              widths={photo.widths}
+              sizes={section.id === 'ogrod' && index > 0
+                ? '(max-width: 560px) 180px, (max-width: 850px) 200px, (max-width: 1160px) 16vw, 174px'
+                : section.photos.length === 1
+                ? '(max-width: 1160px) calc(100vw - 40px), 1120px'
+                : section.photos.length === 2 || section.photos.length === 4
+                  ? '(max-width: 560px) calc(100vw - 32px), (max-width: 1160px) 50vw, 552px'
+                  : section.photos.length === 3 && index === 0
+                    ? '(max-width: 850px) calc(100vw - 40px), (max-width: 1160px) 66vw, 741px'
+                    : '(max-width: 560px) calc(100vw - 32px), (max-width: 850px) 50vw, (max-width: 1160px) 33vw, 363px'}
               format="webp"
+              quality={78}
               loading="lazy"
             />
             <span class="tile-caption">
@@ -111,7 +180,8 @@ const sections = [
   .gallery-section-header p{margin:0;color:var(--color-muted);max-width:60ch}
 
   /* Grid — 1 photo */
-  .gallery--1{display:grid;grid-template-columns:1fr;gap:var(--space-4);grid-auto-rows:clamp(260px,36vw,480px)}
+  .gallery{display:grid;gap:var(--space-4)}
+  .gallery--1{grid-template-columns:1fr;grid-auto-rows:clamp(260px,36vw,480px)}
 
   /* Grid — 2 photos */
   .gallery--2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);grid-auto-rows:clamp(200px,28vw,380px)}
@@ -122,6 +192,17 @@ const sections = [
 
   /* Grid — 4 photos */
   .gallery--4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);grid-auto-rows:clamp(180px,22vw,300px)}
+  .gallery--many{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:clamp(240px,30vw,360px)}
+
+  /* Keep the veranda prominent, with three compact, uncropped portraits beside it. */
+  .gallery.gallery--garden{grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:auto;align-items:center}
+  .gallery--garden .tile:first-child{grid-column:span 3;height:clamp(180px,22vw,300px)}
+  .gallery--garden .tile--full-frame{aspect-ratio:auto}
+  .gallery--garden .tile--full-frame img{height:auto;object-fit:contain}
+  .gallery--garden .tile--full-frame .tile-caption{padding:var(--space-3)}
+  .gallery--garden .tile--full-frame .tile-caption strong{font-size:.9rem;line-height:1.35}
+  .gallery--garden .tile--full-frame:hover img,
+  .gallery--garden .tile--full-frame:focus-visible img{transform:none}
 
   /* Tiles */
   .tile{position:relative;display:block;overflow:hidden;border-radius:var(--radius-card);background:var(--color-soft);isolation:isolate}
@@ -146,11 +227,19 @@ const sections = [
 
   /* Responsive */
   @media(max-width:850px){
+    .gallery.gallery--garden{grid-template-columns:repeat(3,minmax(0,1fr));justify-items:center}
+    .gallery--garden .tile:first-child{grid-column:1/-1;width:calc((100% - var(--space-4))/2)}
+    .gallery--garden .tile--full-frame{width:100%;max-width:200px}
     .gallery--3{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .gallery--many{grid-template-columns:repeat(2,minmax(0,1fr))}
     .gallery--3 .tile--featured{grid-column:span 2;grid-row:span 1}
   }
   @media(max-width:560px){
-    .gallery--2,.gallery--3,.gallery--4{grid-template-columns:1fr;grid-auto-rows:auto}
+    .gallery.gallery--garden{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .gallery--garden .tile:first-child{grid-column:1/-1!important;width:100%;height:auto}
+    .gallery--garden .tile--full-frame{max-width:180px}
+    .gallery--garden .tile--full-frame:last-child{grid-column:1/-1!important}
+    .gallery--2,.gallery--3,.gallery--4,.gallery--many{grid-template-columns:1fr;grid-auto-rows:auto}
     .tile,.tile--featured{grid-column:span 1!important;grid-row:span 1!important;aspect-ratio:4/3}
     .tile-caption{padding:var(--space-4)}
     dialog{padding:var(--space-12) var(--space-10) var(--space-5)}
