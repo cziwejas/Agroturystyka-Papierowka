@@ -4,6 +4,44 @@ const heroSlides = [...document.querySelectorAll('[data-hero-slide]')];
 const heroToggle = document.querySelector('[data-hero-toggle]');
 const heroDots = [...document.querySelectorAll('[data-hero-dot]')];
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+// Leave the first viewport and no-JavaScript content visible immediately.
+// Observe content rather than section backgrounds, so scrolling never exposes gaps.
+if ('IntersectionObserver' in window) {
+  const targets = [...document.querySelectorAll(
+    'main > section:not(.hero):not(.page-hero) > .container, .gallery-nav, .gallery-section-header, .gallery .tile'
+  )].filter((node) => !node.querySelector('.gallery-root'));
+  const reveal = (node) => {
+    node.classList.add('is-visible');
+    observer.unobserve(node);
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting || entry.boundingClientRect.bottom <= 0) reveal(entry.target);
+    });
+  }, { rootMargin: '0px 0px -32px 0px', threshold: 0 });
+  const prepare = () => {
+    observer.disconnect();
+    targets.forEach((node) => {
+      node.classList.remove('scroll-reveal', 'is-visible');
+      if (!reducedMotion.matches && node.getBoundingClientRect().top >= window.innerHeight) {
+        node.classList.add('scroll-reveal');
+        observer.observe(node);
+      }
+    });
+  };
+  document.addEventListener('focusin', (event) => {
+    const pending = event.target.closest('.scroll-reveal');
+    if (pending) reveal(pending);
+  });
+  reducedMotion.addEventListener('change', prepare);
+  // Restored history entries should show their saved viewport without replaying it.
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) prepare();
+  });
+  prepare();
+}
+
 if (heroSlides.length > 1 && heroToggle) {
   let currentSlide = 0;
   let timer;
