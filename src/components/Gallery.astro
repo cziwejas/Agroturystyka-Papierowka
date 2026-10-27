@@ -1,5 +1,7 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import { getImage } from 'astro:assets';
+import NatureGallery from './NatureGallery.astro';
+import galleryScriptUrl from '../scripts/nature-gallery.js?url&no-inline';
 import outside from '../assets/img/zewnatrz.jpg';
 import gazebo from '../assets/img/altana.jpg';
 import gazebo1 from '../assets/img/altana1.jpg';
@@ -7,7 +9,6 @@ import living from '../assets/img/salon.jpg';
 import entry from '../assets/img/wnetrze.jpg';
 import fireplace from '../assets/img/Papierówka_015.jpg';
 import lounge from '../assets/img/Papierówka_022.jpg';
-import veranda from '../assets/img/Papierówka_045.jpg';
 import houseSpring from '../assets/img/new_imgs/9AGnXCNt.jpg';
 import houseFront from '../assets/img/new_imgs/NLGm7_T-.jpg';
 import cosyDetails from '../assets/img/new_imgs/ZsaI_v2N.jpg';
@@ -34,11 +35,11 @@ const sections = [
     eyebrow: 'Dom i otoczenie',
     description: 'Przestronny dom otoczony zielenią, z ogrodem i miejscem na wspólny wypoczynek na świeżym powietrzu.',
     photos: [
-      { src: houseFront, alt: 'Wejście na posesję Papierówki z niebieskimi i zielonymi okiennicami', title: 'Witajcie w Papierówce' },
-      { src: houseSpring, alt: 'Dom z balkonem i niebieskimi okiennicami za kwitnącym drzewem', title: 'Wiosna przy domu' },
-      { src: outside, alt: 'Dom agroturystyczny otoczony zielenią', title: 'Dom' },
-      { src: gazebo, alt: 'Drewniana altana z miejscem do wypoczynku', title: 'Altana' },
-      { src: gazebo1, alt: 'Altana ogrodowa widziana z boku', title: 'Altana ogrodowa' },
+      { src: houseFront, alt: 'Wejście na posesję Papierówki z niebieskimi i zielonymi okiennicami', title: 'Witajcie w Papierówce', layout: 'feature', focus: 'front' },
+      { src: houseSpring, alt: 'Dom z balkonem i niebieskimi okiennicami za kwitnącym drzewem', title: 'Wiosna przy domu', layout: 'portrait', focus: 'house' },
+      { src: outside, alt: 'Dom agroturystyczny otoczony zielenią', title: 'Dom', layout: 'square', focus: 'house' },
+      { src: gazebo, alt: 'Drewniana altana z miejscem do wypoczynku', title: 'Altana', layout: 'square', focus: 'gazebo' },
+      { src: gazebo1, alt: 'Altana ogrodowa widziana z boku', title: 'Altana ogrodowa', layout: 'square', focus: 'gazebo' },
     ],
   },
   {
@@ -47,23 +48,22 @@ const sections = [
     eyebrow: 'Środek domu',
     description: 'Przytulne, przestronne wnętrza z kominkiem, dużym salonem i wszystkim, czego potrzeba do wspólnego wypoczynku.',
     photos: [
-      { src: lounge, alt: 'Salon z narożną sofą, fotelami i schodami na piętro', title: 'Salon' },
-      { src: living, alt: 'Przytulny salon z drewnianymi elementami', title: 'Wnętrze' },
-      { src: entry, alt: 'Drewniane wnętrze domu', title: 'Domowe ciepło' },
-      { src: fireplace, alt: 'Rozpalony kominek i gry planszowe przygotowane dla gości', title: 'Kominek i gry' },
-      { src: cosyDetails, alt: 'Kwiaty i słodycze na stole, w tle rozpalony piecyk', title: 'Przytulne detale' },
+      { src: lounge, alt: 'Salon z narożną sofą, fotelami i schodami na piętro', title: 'Salon', layout: 'feature', focus: 'lounge' },
+      { src: fireplace, alt: 'Rozpalony kominek i gry planszowe przygotowane dla gości', title: 'Kominek i gry', layout: 'portrait', focus: 'fireplace' },
+      { src: living, alt: 'Przytulny salon z drewnianymi elementami', title: 'Wnętrze', layout: 'square', focus: 'lounge' },
+      { src: entry, alt: 'Drewniane wnętrze domu', title: 'Domowe ciepło', layout: 'square', focus: 'lounge' },
+      { src: cosyDetails, alt: 'Kwiaty i słodycze na stole, w tle rozpalony piecyk', title: 'Przytulne detale', layout: 'square', focus: 'details' },
     ],
   },
   {
     id: 'ogrod',
     label: 'Ogród i relaks',
     eyebrow: 'Na zewnątrz',
-    description: 'Zadaszona weranda, ogród, plac zabaw i basen w sezonie — miejsca na wspólny odpoczynek i zabawę.',
+    description: 'Ogród, plac zabaw i basen w sezonie — miejsca na wspólny odpoczynek i zabawę.',
     photos: [
-      { src: veranda, alt: 'Zadaszona weranda z drewnianym stołem i kolorowymi lampkami', title: 'Weranda' },
-      { src: pool, alt: 'Okrągły basen ogrodowy, a za nim kolorowy domek ze zjeżdżalnią', title: 'Basen w sezonie' },
-      { src: playground, alt: 'Kolorowy drewniany domek dla dzieci ze schodkami i niebieską zjeżdżalnią', title: 'Dla najmłodszych' },
-      { src: apples, alt: 'Zielone jabłka na gałęzi, w tle ogród z basenem i placem zabaw', title: 'Lato w ogrodzie' },
+      { src: pool, alt: 'Okrągły basen ogrodowy, a za nim kolorowy domek ze zjeżdżalnią', title: 'Basen w sezonie', layout: 'full-frame' },
+      { src: playground, alt: 'Kolorowy drewniany domek dla dzieci ze schodkami i niebieską zjeżdżalnią', title: 'Dla najmłodszych', layout: 'full-frame' },
+      { src: apples, alt: 'Zielone jabłka na gałęzi, w tle ogród z basenem i placem zabaw', title: 'Lato w ogrodzie', layout: 'full-frame' },
     ],
   },
   {
@@ -72,18 +72,18 @@ const sections = [
     eyebrow: 'Blisko natury',
     description: 'Leśne ścieżki, rowerowe wyprawy, dzikie zwierzęta i krajobrazy zmieniające się wraz z porami roku.',
     photos: [
-      { src: autumnTrail, alt: 'Leśna droga pośród drzew o złotych i pomarańczowych liściach', title: 'Jesienne spacery' },
-      { src: greenTrail, alt: 'Wąska ścieżka w lesie pełnym zielonych liści i paproci', title: 'Zielone ścieżki' },
-      { src: forestStream, alt: 'Leśny strumień otoczony bujną zielenią w słoneczny dzień', title: 'Nad strumieniem' },
-      { src: forestCanopy, alt: 'Wysoki pień porośnięty mchem i korony drzew widziane od dołu', title: 'Spójrzcie w górę' },
-      { src: cycling, alt: 'Rowery przy leśnej drodze otoczonej zielonymi drzewami', title: 'Na dwóch kółkach' },
-      { src: morningRoad, alt: 'Promienie słońca przebijające przez mgłę nad leśną drogą', title: 'Światło o poranku' },
-      { src: bisonHerd, alt: 'Stado żubrów stojących blisko siebie na łące', title: 'Żubry' },
-      { src: winterBison, alt: 'Żubr z pyskiem i sierścią pokrytymi śniegiem', title: 'Zimowe spotkanie' },
-      { src: deer, alt: 'Jeleń z porożem wśród zielonych roślin na skraju lasu', title: 'Leśni mieszkańcy' },
-      { src: sunset, alt: 'Zachodzące słońce widoczne między gałęziami drzewa iglastego', title: 'Spokojny wieczór' },
-      { src: winterRoad, alt: 'Ośnieżona droga przez las w niebieskim świetle zmierzchu', title: 'Zima w lesie' },
-      { src: frostyTree, alt: 'Drzewo pokryte szronem na zaśnieżonym polu pod błękitnym niebem', title: 'Krajobraz w bieli' },
+      { src: autumnTrail, alt: 'Leśna droga pośród drzew o złotych i pomarańczowych liściach', title: 'Jesienne spacery', layout: 'feature', focus: 'autumn' },
+      { src: cycling, alt: 'Rowery przy leśnej drodze otoczonej zielonymi drzewami', title: 'Na dwóch kółkach', layout: 'portrait', focus: 'cycling' },
+      { src: forestStream, alt: 'Leśny strumień otoczony bujną zielenią w słoneczny dzień', title: 'Nad strumieniem', layout: 'square', focus: 'stream' },
+      { src: forestCanopy, alt: 'Wysoki pień porośnięty mchem i korony drzew widziane od dołu', title: 'Spójrzcie w górę', layout: 'square', focus: 'canopy' },
+      { src: morningRoad, alt: 'Promienie słońca przebijające przez mgłę nad leśną drogą', title: 'Światło o poranku', layout: 'feature', focus: 'light' },
+      { src: winterBison, alt: 'Żubr z pyskiem i sierścią pokrytymi śniegiem', title: 'Zimowe spotkanie', layout: 'portrait', focus: 'bison' },
+      { src: bisonHerd, alt: 'Stado żubrów stojących blisko siebie na łące', title: 'Żubry', layout: 'square', focus: 'herd' },
+      { src: frostyTree, alt: 'Drzewo pokryte szronem na zaśnieżonym polu pod błękitnym niebem', title: 'Krajobraz w bieli', layout: 'portrait', focus: 'frost' },
+      { src: deer, alt: 'Jeleń z porożem wśród zielonych roślin na skraju lasu', title: 'Leśni mieszkańcy', layout: 'wide', focus: 'deer' },
+      { src: sunset, alt: 'Zachodzące słońce widoczne między gałęziami drzewa iglastego', title: 'Spokojny wieczór', layout: 'square', focus: 'sunset' },
+      { src: greenTrail, alt: 'Wąska ścieżka w lesie pełnym zielonych liści i paproci', title: 'Zielone ścieżki', layout: 'wide', focus: 'green' },
+      { src: winterRoad, alt: 'Ośnieżona droga przez las w niebieskim świetle zmierzchu', title: 'Zima w lesie', layout: 'wide', focus: 'winter' },
     ],
   },
 ];
@@ -113,58 +113,12 @@ const gallerySections = await Promise.all(sections.map(async (section) => ({
 
   {gallerySections.map((section) => (
     <section class="gallery-section" id={section.id} aria-labelledby={`${section.id}-heading`}>
-      <div class="gallery-section-header">
-        <span class="eyebrow">{section.eyebrow}</span>
-        <h2 id={`${section.id}-heading`}>{section.label}</h2>
-        <p>{section.description}</p>
-      </div>
-      <div class:list={['gallery', `gallery--${section.photos.length}`, { 'gallery--many': section.photos.length > 4, 'gallery--garden': section.id === 'ogrod' }]} aria-label={`Zdjęcia: ${section.label}`}>
-        {section.photos.map((photo, index) => (
-          <a
-            class:list={['tile', { 'tile--featured': index === 0 && section.photos.length === 3, 'tile--full-frame': section.id === 'ogrod' && index > 0 }]}
-            href={photo.preview.src}
-            data-lightbox
-            data-alt={photo.alt}
-            data-caption={photo.title}
-            aria-label={`${photo.title} — otwórz zdjęcie`}
-          >
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              width={Math.min(photo.src.width, 1280)}
-              widths={photo.widths}
-              sizes={section.id === 'ogrod' && index > 0
-                ? '(max-width: 560px) 180px, (max-width: 850px) 200px, (max-width: 1160px) 16vw, 174px'
-                : section.photos.length === 1
-                ? '(max-width: 1160px) calc(100vw - 40px), 1120px'
-                : section.photos.length === 2 || section.photos.length === 4
-                  ? '(max-width: 560px) calc(100vw - 32px), (max-width: 1160px) 50vw, 552px'
-                  : section.photos.length === 3 && index === 0
-                    ? '(max-width: 850px) calc(100vw - 40px), (max-width: 1160px) 66vw, 741px'
-                    : '(max-width: 560px) calc(100vw - 32px), (max-width: 850px) 50vw, (max-width: 1160px) 33vw, 363px'}
-              format="webp"
-              quality={78}
-              loading="lazy"
-            />
-            <span class="tile-caption">
-              <strong>{photo.title}</strong>
-            </span>
-          </a>
-        ))}
-      </div>
+      <NatureGallery section={section} />
     </section>
   ))}
 </div>
 
-<dialog id="lightbox" aria-label="Podgląd zdjęcia">
-  <button class="close" type="button" data-close aria-label="Zamknij podgląd">×</button>
-  <button class="previous" type="button" data-previous aria-label="Poprzedni obraz">‹</button>
-  <figure>
-    <img src="" alt="" />
-    <figcaption></figcaption>
-  </figure>
-  <button class="next" type="button" data-next aria-label="Następny obraz">›</button>
-</dialog>
+<script is:inline src={galleryScriptUrl} defer></script>
 
 <style>
   /* Nav */
@@ -175,75 +129,4 @@ const gallerySections = await Promise.all(sections.map(async (section) => ({
   /* Section */
   .gallery-section{margin-bottom:var(--space-16)}
   .gallery-section:last-child{margin-bottom:0}
-  .gallery-section-header{margin-bottom:var(--space-6)}
-  .gallery-section-header h2{margin:var(--space-2) 0;font-size:clamp(1.5rem,3vw,2rem)}
-  .gallery-section-header p{margin:0;color:var(--color-muted);max-width:60ch}
-
-  /* Grid — 1 photo */
-  .gallery{display:grid;gap:var(--space-4)}
-  .gallery--1{grid-template-columns:1fr;grid-auto-rows:clamp(260px,36vw,480px)}
-
-  /* Grid — 2 photos */
-  .gallery--2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);grid-auto-rows:clamp(200px,28vw,380px)}
-
-  /* Grid — 3 photos */
-  .gallery--3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);grid-auto-rows:clamp(180px,22vw,300px)}
-  .gallery--3 .tile--featured{grid-column:span 2;grid-row:span 2}
-
-  /* Grid — 4 photos */
-  .gallery--4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);grid-auto-rows:clamp(180px,22vw,300px)}
-  .gallery--many{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:clamp(240px,30vw,360px)}
-
-  /* Keep the veranda prominent, with three compact, uncropped portraits beside it. */
-  .gallery.gallery--garden{grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:auto;align-items:center}
-  .gallery--garden .tile:first-child{grid-column:span 3;height:clamp(180px,22vw,300px)}
-  .gallery--garden .tile--full-frame{aspect-ratio:auto}
-  .gallery--garden .tile--full-frame img{height:auto;object-fit:contain}
-  .gallery--garden .tile--full-frame .tile-caption{padding:var(--space-3)}
-  .gallery--garden .tile--full-frame .tile-caption strong{font-size:.9rem;line-height:1.35}
-  .gallery--garden .tile--full-frame:hover img,
-  .gallery--garden .tile--full-frame:focus-visible img{transform:none}
-
-  /* Tiles */
-  .tile{position:relative;display:block;overflow:hidden;border-radius:var(--radius-card);background:var(--color-soft);isolation:isolate}
-  .tile img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
-  .tile::after{position:absolute;inset:40% 0 0;z-index:0;background:linear-gradient(transparent,var(--color-gallery-overlay));content:'';pointer-events:none}
-  .tile:hover img,.tile:focus-visible img{transform:scale(1.04)}
-  .tile-caption{position:absolute;right:0;bottom:0;left:0;z-index:1;padding:var(--space-5) var(--space-5) var(--space-4)}
-  .tile-caption strong{display:block;color:var(--color-white);font-family:'Lora',Georgia,serif;font-size:clamp(1rem,1.6vw,1.3rem);font-weight:600;line-height:1.2}
-
-  /* Lightbox */
-  dialog{position:fixed;inset:0;max-width:min(94vw,1000px);max-height:92vh;margin:auto;padding:var(--space-12) var(--space-12) var(--space-6);border:0;border-radius:var(--radius-card);background:var(--color-footer);color:var(--color-white)}
-  dialog::backdrop{background:var(--color-dialog-backdrop)}
-  dialog figure{margin:0}
-  dialog img{display:block;max-width:100%;max-height:72vh;margin:auto;object-fit:contain}
-  figcaption{padding-top:var(--space-3);text-align:center;color:var(--color-footer-muted)}
-  .close,.previous,.next{position:absolute;display:grid;width:46px;height:46px;place-items:center;border:1px solid var(--color-line);border-radius:50%;background:var(--color-white);color:var(--color-ink);font-size:1.8rem;cursor:pointer;transition:background .2s}
-  .close:hover,.previous:hover,.next:hover{background:var(--color-soft)}
-  .close{top:var(--space-3);right:var(--space-3)}
-  .previous,.next{top:50%;transform:translateY(-50%)}
-  .previous{left:var(--space-3)}
-  .next{right:var(--space-3)}
-
-  /* Responsive */
-  @media(max-width:850px){
-    .gallery.gallery--garden{grid-template-columns:repeat(3,minmax(0,1fr));justify-items:center}
-    .gallery--garden .tile:first-child{grid-column:1/-1;width:calc((100% - var(--space-4))/2)}
-    .gallery--garden .tile--full-frame{width:100%;max-width:200px}
-    .gallery--3{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .gallery--many{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .gallery--3 .tile--featured{grid-column:span 2;grid-row:span 1}
-  }
-  @media(max-width:560px){
-    .gallery.gallery--garden{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .gallery--garden .tile:first-child{grid-column:1/-1!important;width:100%;height:auto}
-    .gallery--garden .tile--full-frame{max-width:180px}
-    .gallery--garden .tile--full-frame:last-child{grid-column:1/-1!important}
-    .gallery--2,.gallery--3,.gallery--4,.gallery--many{grid-template-columns:1fr;grid-auto-rows:auto}
-    .tile,.tile--featured{grid-column:span 1!important;grid-row:span 1!important;aspect-ratio:4/3}
-    .tile-caption{padding:var(--space-4)}
-    dialog{padding:var(--space-12) var(--space-10) var(--space-5)}
-    .previous{left:var(--space-1)}
-    .next{right:var(--space-1)}
-  }
 </style>

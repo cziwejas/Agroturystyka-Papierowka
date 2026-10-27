@@ -1,0 +1,186 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Photo {
+  src: ImageMetadata;
+  alt: string;
+  title: string;
+  preview: { src: string };
+  widths: number[];
+  layout?: string;
+  focus?: string;
+}
+interface Props {
+  section: { id: string; label: string; eyebrow: string; description: string; photos: Photo[] };
+}
+const { section } = Astro.props;
+const compact = section.id === 'zewnetrze' || section.id === 'wnetrza';
+const sizes = (photo: Photo, index: number) => {
+  if (section.id === 'ogrod') return '(max-width: 480px) calc(100vw - 32px), (max-width: 640px) calc(100vw - 40px), (max-width: 1160px) 33vw, 363px';
+  if (compact) return photo.layout === 'feature'
+    ? '(max-width: 540px) calc(100vw - 32px), (max-width: 1000px) calc(100vw - 40px), (max-width: 1160px) 66vw, 741px'
+    : index === section.photos.length - 1
+      ? '(max-width: 540px) calc(100vw - 32px), (max-width: 1000px) calc(100vw - 40px), (max-width: 1160px) 33vw, 363px'
+      : '(max-width: 540px) calc(100vw - 32px), (max-width: 1000px) 50vw, (max-width: 1160px) 33vw, 363px';
+  return photo.layout === 'feature' || photo.layout === 'wide'
+  ? '(max-width: 540px) calc(100vw - 32px), (max-width: 1000px) calc(100vw - 40px), (max-width: 1160px) 50vw, 552px'
+  : '(max-width: 540px) calc(100vw - 32px), (max-width: 1000px) 50vw, (max-width: 1160px) 25vw, 268px';
+};
+---
+
+<nature-gallery class:list={{ 'nature-gallery--compact': compact, 'nature-gallery--garden': section.id === 'ogrod' }}>
+  <header class="nature-heading">
+    <span class="eyebrow">{section.eyebrow}</span>
+    <h2 id={`${section.id}-heading`}>{section.label}</h2>
+    <p>{section.description}</p>
+  </header>
+
+  <div class="nature-grid" aria-label={`Zdjęcia: ${section.label}`}>
+    {section.photos.map((photo, index) => (
+      <figure class:list={['nature-card', `nature-card--${photo.layout || 'square'}`, `nature-card--delay-${index % 4}`]} data-focus={photo.focus}>
+        <a href={photo.preview.src} data-nature-open data-caption={photo.title} data-alt={photo.alt} aria-label={`${photo.title} — powiększ zdjęcie`}>
+          <Image src={photo.src} alt={photo.alt} width={Math.min(photo.src.width, 1280)} widths={photo.widths} sizes={sizes(photo, index)} format="webp" quality={80} loading="lazy" />
+          <span class="nature-expand" aria-hidden="true">↗</span>
+        </a>
+        <figcaption>{photo.title}</figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <dialog class="nature-lightbox" data-nature-dialog aria-label={`Zdjęcia — ${section.label}`} aria-describedby={`${section.id}-lightbox-caption`}>
+    <div class="nature-toolbar">
+      <span>{section.label} <span class="nature-count" data-nature-count aria-hidden="true"></span></span>
+      <button type="button" data-nature-close aria-label="Zamknij podgląd zdjęcia">×</button>
+    </div>
+    <div class="nature-stage" data-nature-stage>
+      <button type="button" data-nature-prev aria-label="Poprzednie zdjęcie">‹</button>
+      <figure>
+        <img src="" alt="" width="1600" height="1200" data-nature-image />
+        <figcaption id={`${section.id}-lightbox-caption`} data-nature-caption></figcaption>
+      </figure>
+      <button type="button" data-nature-next aria-label="Następne zdjęcie">›</button>
+    </div>
+    <p class="nature-error" data-nature-error hidden>Nie udało się wczytać zdjęcia. <a data-nature-file target="_blank" rel="noopener noreferrer">Otwórz plik zdjęcia ↗</a></p>
+    <p class="nature-help">Przeglądaj strzałkami lub przesuń palcem · Esc zamyka podgląd</p>
+    <span class="nature-status" role="status" aria-live="polite" data-nature-status></span>
+  </dialog>
+</nature-gallery>
+
+<style>
+  nature-gallery {
+    --nature-gap: var(--space-4);
+    --nature-radius: var(--radius-card);
+    --nature-shadow: 0 5px 18px #24271c12;
+    --nature-caption-shade: #101b11ed;
+    --nature-lightbox-bg: #101a13;
+    display: block;
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-8);
+  }
+  .nature-heading { max-width: 650px; margin-bottom: clamp(var(--space-8), 4vw, var(--space-12)); }
+  .nature-heading .eyebrow { display: block; margin-bottom: var(--space-3); }
+  .nature-heading h2 { margin: 0 0 var(--space-4); font-size: clamp(2rem, 4vw, 3rem); }
+  .nature-heading p { margin: 0; color: var(--color-muted); line-height: 1.8; }
+  .nature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(150px, 16vw, 190px); gap: var(--nature-gap); }
+  .nature-card { position: relative; min-width: 0; min-height: 0; margin: 0; overflow: hidden; border-radius: var(--nature-radius); background: var(--color-soft); box-shadow: var(--nature-shadow); isolation: isolate; }
+  .nature-card--feature { grid-column: span 2; grid-row: span 2; }
+  .nature-card--portrait { grid-row: span 2; }
+  .nature-card--wide { grid-column: span 2; }
+  .nature-gallery--compact .nature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .nature-card a { position: relative; display: block; width: 100%; height: 100%; border-radius: inherit; }
+  .nature-card a:focus-visible { outline: 3px solid var(--color-focus); outline-offset: -5px; }
+  .nature-card img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .55s cubic-bezier(.22, 1, .36, 1); }
+  .nature-card a::after { position: absolute; inset: auto 0 0; height: min(100%, 180px); background: linear-gradient(180deg, #101b1100, #101b11b3 45%, var(--nature-caption-shade)); content: ''; transition: opacity .5s ease; }
+  .nature-card figcaption { position: absolute; right: 0; bottom: 0; left: 0; z-index: 1; padding: var(--space-5); color: var(--color-white); font: 500 clamp(1rem, 1.65vw, 1.35rem)/1.4 'Lora', Georgia, serif; text-shadow: 0 2px 5px #000c; pointer-events: none; transition: transform .5s ease; }
+  .nature-card--feature figcaption { padding: clamp(var(--space-5), 3vw, var(--space-8)); font-size: clamp(1.4rem, 2.5vw, 2rem); }
+  .nature-expand { position: absolute; top: var(--space-4); right: var(--space-4); z-index: 1; display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid #ffffff70; border-radius: 50%; background: #101b1180; color: var(--color-white); opacity: 0; transform: translateY(4px); transition: opacity .45s ease, transform .45s ease; }
+  .nature-card:focus-within img { transform: scale(1.05); }
+  .nature-card:focus-within figcaption { transform: translateY(-4px); }
+  .nature-card:focus-within .nature-expand { opacity: 1; transform: none; }
+  .nature-card[data-focus="autumn"] img { object-position: 50% 65%; }
+  .nature-card[data-focus="cycling"] img { object-position: 50% 65%; }
+  .nature-card[data-focus="stream"] img { object-position: 50% 70%; }
+  .nature-card[data-focus="canopy"] img { object-position: 50% 35%; }
+  .nature-card[data-focus="light"] img { object-position: 50% 62%; }
+  .nature-card[data-focus="bison"] img { object-position: 58% 45%; }
+  .nature-card[data-focus="herd"] img { object-position: 50% 55%; }
+  .nature-card[data-focus="frost"] img { object-position: 50% 38%; }
+  .nature-card[data-focus="deer"] img { object-position: 50% 20%; }
+  .nature-card[data-focus="sunset"] img { object-position: 50% 32%; }
+  .nature-card[data-focus="green"] img { object-position: 50% 78%; }
+  .nature-card[data-focus="winter"] img { object-position: 50% 76%; }
+  .nature-card[data-focus="front"] img { object-position: 50% 50%; }
+  .nature-card[data-focus="house"] img { object-position: 50% 40%; }
+  .nature-card[data-focus="gazebo"] img { object-position: 50% 45%; }
+  .nature-card[data-focus="lounge"] img { object-position: 50% 60%; }
+  .nature-card[data-focus="fireplace"] img { object-position: 50% 58%; }
+  .nature-card[data-focus="details"] img { object-position: 50% 67%; }
+  @media (hover: hover) and (pointer: fine) {
+    .nature-card:hover img { transform: scale(1.05); }
+    .nature-card:hover a::after { opacity: .88; }
+    .nature-card:hover figcaption { transform: translateY(-4px); }
+    .nature-card:hover .nature-expand { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .nature-card[data-reveal="pending"] { opacity: 0; transform: translateY(18px); }
+    .nature-card[data-reveal="visible"] { animation: nature-rise .65s cubic-bezier(.22, 1, .36, 1) var(--nature-delay, 0ms) both; }
+    .nature-card--delay-1 { --nature-delay: 60ms; }
+    .nature-card--delay-2 { --nature-delay: 120ms; }
+    .nature-card--delay-3 { --nature-delay: 180ms; }
+  }
+  @keyframes nature-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 1000px) {
+    .nature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(145px, 23vw, 200px); }
+    .nature-gallery--compact .nature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .nature-gallery--compact .nature-card:last-child { grid-column: span 2; grid-row: span 2; }
+    .nature-card[data-focus="deer"] { grid-column: span 1; }
+    .nature-card[data-focus="green"] { grid-column: span 1; grid-row: span 2; }
+    .nature-card[data-focus="sunset"] { grid-row: span 2; }
+  }
+  @media (max-width: 540px) {
+    .nature-grid { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
+    .nature-gallery--compact .nature-grid { grid-template-columns: minmax(0, 1fr); }
+    .nature-grid .nature-card { grid-column: auto; grid-row: auto; aspect-ratio: 4 / 3; }
+    .nature-gallery--compact .nature-grid .nature-card { grid-column: auto; grid-row: auto; }
+    .nature-grid .nature-card--feature { aspect-ratio: 1; }
+    .nature-grid .nature-card--portrait { aspect-ratio: 3 / 4; }
+    .nature-card figcaption { padding: var(--space-5); font-size: 1.15rem; }
+    .nature-card--feature figcaption { font-size: 1.6rem; }
+  }
+  /* Three complete portraits fill the section in equally sized columns. */
+  .nature-gallery--garden .nature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: auto; align-items: start; width: 100%; }
+  .nature-gallery--garden .nature-card--full-frame { aspect-ratio: auto; }
+  .nature-gallery--garden .nature-card--full-frame img { height: auto; object-fit: contain; transform: none; }
+  .nature-gallery--garden .nature-card--full-frame figcaption { padding: var(--space-4); font-size: clamp(.95rem, 1.3vw, 1.1rem); line-height: 1.35; }
+  @media (max-width: 640px) {
+    .nature-gallery--garden .nature-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  .nature-lightbox { position: fixed; inset: 0; width: 100%; height: 100%; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: max(var(--space-4), env(safe-area-inset-top)) max(var(--space-5), env(safe-area-inset-right)) max(var(--space-4), env(safe-area-inset-bottom)) max(var(--space-5), env(safe-area-inset-left)); border: 0; background: var(--nature-lightbox-bg); color: var(--color-white); overscroll-behavior: contain; }
+  .nature-lightbox[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: var(--space-4); }
+  .nature-lightbox::backdrop { background: var(--color-dialog-backdrop); }
+  .nature-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+  .nature-toolbar > span { font-family: 'Lora', Georgia, serif; font-size: 1.15rem; }
+  .nature-count { margin-left: var(--space-4); font: 400 .85rem 'Raleway', sans-serif; color: var(--color-footer-muted); font-variant-numeric: tabular-nums; }
+  .nature-lightbox button { display: grid; flex: 0 0 auto; width: 48px; height: 48px; place-items: center; padding: 0; border: 1px solid #ffffff70; border-radius: 50%; background: #ffffff12; color: var(--color-white); font-size: 2rem; cursor: pointer; }
+  .nature-lightbox button:hover { background: #ffffff26; }
+  .nature-lightbox :is(button, a):focus-visible { outline: 3px solid var(--color-white); outline-offset: 4px; }
+  .nature-stage { display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: var(--space-5); min-height: 0; touch-action: pan-y pinch-zoom; }
+  .nature-stage figure { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: var(--space-4); height: 100%; min-width: 0; min-height: 0; margin: 0; }
+  .nature-stage img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+  .nature-stage figcaption { padding: 0; color: var(--color-white); font: 500 clamp(1rem, 2vw, 1.35rem)/1.4 'Lora', Georgia, serif; text-align: center; }
+  .nature-help { max-width: none; margin: 0; color: var(--color-footer-muted); font-size: .78rem; text-align: center; }
+  .nature-error { max-width: none; margin: 0; text-align: center; }.nature-error a { color: var(--color-white); }
+  .nature-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  @media (max-width: 540px) {
+    .nature-lightbox { padding-inline: var(--space-3); }
+    .nature-lightbox[open] { gap: var(--space-3); }
+    .nature-stage { position: relative; grid-template-columns: minmax(0, 1fr); align-items: stretch; gap: 0; padding-bottom: 60px; }
+    .nature-stage button { position: absolute; bottom: 0; }.nature-stage [data-nature-prev] { left: calc(50% - 60px); }.nature-stage [data-nature-next] { right: calc(50% - 60px); }
+    .nature-help { font-size: .7rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nature-card img, .nature-card figcaption, .nature-expand { transition: none; transform: none !important; }
+    .nature-card { animation: none; opacity: 1; transform: none; }
+  }
+</style>
