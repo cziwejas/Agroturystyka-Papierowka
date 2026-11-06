@@ -162,8 +162,10 @@ const sizes = (photo: Photo, index: number) => {
   .nature-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
   .nature-toolbar > span { font-family: 'Lora', Georgia, serif; font-size: 1.15rem; }
   .nature-count { margin-left: var(--space-4); font: 400 .85rem 'Raleway', sans-serif; color: var(--color-footer-muted); font-variant-numeric: tabular-nums; }
-  .nature-lightbox button { display: grid; flex: 0 0 auto; width: 48px; height: 48px; place-items: center; padding: 0; border: 1px solid #ffffff70; border-radius: 50%; background: #ffffff12; color: var(--color-white); font-size: 2rem; cursor: pointer; }
-  .nature-lightbox button:hover { background: #ffffff26; }
+  .nature-lightbox button { display: grid; flex: 0 0 auto; width: 48px; height: 48px; place-items: center; padding: 0; border: 1px solid #ffffff70; border-radius: 50%; background: #ffffff12; color: var(--color-white); font-size: 2rem; cursor: pointer; transition: background-color var(--motion-duration) var(--motion-ease); }
+  @media (hover: hover) {
+    .nature-lightbox button:hover { background: #ffffff26; }
+  }
   .nature-lightbox :is(button, a):focus-visible { outline: 3px solid var(--color-white); outline-offset: 4px; }
   .nature-stage { display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: var(--space-5); min-height: 0; touch-action: pan-y pinch-zoom; }
   .nature-stage figure { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: var(--space-4); height: 100%; min-width: 0; min-height: 0; margin: 0; }

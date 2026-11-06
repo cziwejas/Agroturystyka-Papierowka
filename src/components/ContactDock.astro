@@ -18,7 +18,7 @@ import { site } from '../config/site';
     .dock-inner{display:grid;grid-template-columns:1fr 1.4fr;align-items:stretch;gap:var(--space-3)}
     .dock-inner :global(.messenger-button){width:100%;padding-inline:var(--space-3)}
     .dock-phone{display:flex;min-height:48px;align-items:center;justify-content:center;gap:var(--space-2);border:1px solid var(--color-line);border-radius:var(--radius-pill);color:var(--color-forest-dark);font-weight:700;text-decoration:none}
-    .dock-phone:hover{background:var(--color-soft)}
+    @media(hover:hover){.dock-phone:hover{background:var(--color-soft)}}
     :global(body){padding-bottom:calc(var(--space-16) + var(--space-6) + env(safe-area-inset-bottom))}
     :global(html){scroll-padding-bottom:calc(var(--space-16) + var(--space-6) + env(safe-area-inset-bottom))}
   }
