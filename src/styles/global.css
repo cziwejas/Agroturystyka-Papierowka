@@ -93,16 +93,18 @@ p { max-width: 70ch; margin: var(--space-2) 0 var(--space-4); }
 .page-hero h1 { margin: var(--space-2) 0; }
 .page-hero p { margin-bottom: 0; color: var(--color-muted); }
 
-/* Only off-screen content is prepared for reveal by site.js. */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .6s cubic-bezier(.22, 1, .36, 1), transform .6s cubic-bezier(.22, 1, .36, 1);
-}
-.scroll-reveal.is-visible,
-.scroll-reveal:focus-within { opacity: 1; transform: none; }
-
 @media (prefers-reduced-motion: no-preference) {
+  /* site.js prepares data-reveal targets. For a stagger, set --i to each item's zero-based position in CSS. */
+  .scroll-reveal:not(.is-visible):not(:focus-within) {
+    opacity: 0;
+    transform: translateY(var(--reveal-offset, 20px));
+  }
+  [data-reveal] { --reveal-offset: var(--space-4); }
+  .scroll-reveal.is-visible:not(:focus-within) {
+    transition: opacity .6s cubic-bezier(.22, 1, .36, 1), transform .6s cubic-bezier(.22, 1, .36, 1);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+
   /* Keep ordinary document navigation, browser history and page scripts. */
   @view-transition { navigation: auto; }
 
@@ -127,5 +129,4 @@ p { max-width: 70ch; margin: var(--space-2) 0 var(--space-4); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
-  .scroll-reveal { opacity: 1; transform: none; }
 }

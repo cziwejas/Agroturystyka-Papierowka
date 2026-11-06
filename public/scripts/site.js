@@ -5,41 +5,46 @@ const heroToggle = document.querySelector('[data-hero-toggle]');
 const heroDots = [...document.querySelectorAll('[data-hero-dot]')];
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-// Leave the first viewport and no-JavaScript content visible immediately.
-// Observe content rather than section backgrounds, so scrolling never exposes gaps.
-if ('IntersectionObserver' in window) {
+// Add data-reveal to a section's inner content or to individual cards. Avoid nesting reveal targets.
+// Only prepare content below the first viewport (or hidden cards that may be expanded later).
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
   const targets = [...document.querySelectorAll(
-    'main > section:not(.hero):not(.page-hero) > .container, .gallery-nav, .gallery-section-header, .gallery .tile'
-  )].filter((node) => !node.querySelector('.gallery-root'));
-  const reveal = (node) => {
-    node.classList.add('is-visible');
+    '[data-reveal], main > section:not(.hero):not(.page-hero) > .container, .gallery-nav, .gallery-section-header, .gallery .tile'
+  )].filter((node) => !node.querySelector('[data-reveal], .gallery-root'));
+  const pending = new Set(targets.filter((node) => {
+    const rect = node.getBoundingClientRect();
+    return rect.height === 0 || rect.top >= window.innerHeight;
+  }));
+  const reveal = (node, animate = true) => {
+    if (!pending.delete(node)) return;
     observer.unobserve(node);
+    if (animate) node.classList.add('is-visible');
+    else node.classList.remove('scroll-reveal');
   };
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting || entry.boundingClientRect.bottom <= 0) reveal(entry.target);
-    });
-  }, { rootMargin: '0px 0px -32px 0px', threshold: 0 });
-  const prepare = () => {
-    observer.disconnect();
-    targets.forEach((node) => {
-      node.classList.remove('scroll-reveal', 'is-visible');
-      if (!reducedMotion.matches && node.getBoundingClientRect().top >= window.innerHeight) {
-        node.classList.add('scroll-reveal');
-        observer.observe(node);
-      }
-    });
-  };
+    for (const entry of entries) {
+      if (entry.isIntersecting && entry.boundingClientRect.height > 0) reveal(entry.target);
+    }
+  });
+  for (const node of pending) {
+    node.classList.add('scroll-reveal');
+    observer.observe(node);
+  }
   document.addEventListener('focusin', (event) => {
-    const pending = event.target.closest('.scroll-reveal');
-    if (pending) reveal(pending);
+    const node = event.target.closest('.scroll-reveal');
+    if (node) reveal(node, false);
   });
-  reducedMotion.addEventListener('change', prepare);
-  // Restored history entries should show their saved viewport without replaying it.
+  reducedMotion.addEventListener('change', (event) => {
+    if (event.matches) pending.forEach((node) => reveal(node, false));
+  });
+  // Show the restored viewport without rearming elements that have already appeared.
   window.addEventListener('pageshow', (event) => {
-    if (event.persisted) prepare();
+    if (!event.persisted) return;
+    pending.forEach((node) => {
+      const rect = node.getBoundingClientRect();
+      if (rect.height > 0 && rect.top < window.innerHeight) reveal(node, false);
+    });
   });
-  prepare();
 }
 
 if (heroSlides.length > 1 && heroToggle) {
