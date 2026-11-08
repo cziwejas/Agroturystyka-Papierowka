@@ -3,7 +3,7 @@ import FeatureCard from './FeatureCard.astro';
 import { amenities } from '../config/site';
 import amenitiesScriptUrl from '../scripts/amenities.js?url&no-inline';
 ---
-<section class="section amenities"><div class="container"><div class="section-title" data-reveal><span class="eyebrow">Wszystko na miejscu</span><h2>Wypoczynek po swojemu</h2><p>Przestrzeń dla bliskich, chwile relaksu i podlaska przyroda tuż obok.</p></div>
+<section class="section amenities"><div class="container"><div class="section-title" data-reveal><h2>Co jest na miejscu</h2></div>
   <amenities-list>
     <div class="grid" id="home-amenities">
       {amenities.map((item, index) => <div class:list={['feature-item', { 'is-extra': index >= 4 }]} data-reveal><FeatureCard {...item} /></div>)}
