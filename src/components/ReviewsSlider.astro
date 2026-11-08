@@ -15,7 +15,15 @@ import reviewsScriptUrl from '../scripts/reviews-slider.js?url&no-inline';
       </div>
       <blockquote><p class="review-text" data-review-text>{review.text}</p></blockquote>
       <div class="review-more-slot"><button class="review-more" type="button" data-review-more aria-label={`Czytaj całą opinię: ${review.author}`} aria-haspopup="dialog" aria-controls="guest-review-dialog" hidden>Czytaj więcej</button></div>
-      <figcaption><cite data-review-author>{review.author}</cite><span data-review-date>{review.date}</span></figcaption>
+      <figcaption>
+        <cite data-review-author>{review.author}</cite>
+        <span data-review-date>{review.date}</span>
+        {review.url && (
+          <a class="review-source" href={review.url} target="_blank" rel="noopener noreferrer" aria-label={`Zobacz opinię w Google: ${review.author}`}>
+            Zobacz opinię w Google <span aria-hidden="true">↗</span>
+          </a>
+        )}
+      </figcaption>
     </figure>)}
   </div>
   <div class="controls" hidden>
@@ -30,6 +38,7 @@ import reviewsScriptUrl from '../scripts/reviews-slider.js?url&no-inline';
     <div class="review-dialog-header"><h3 id="guest-review-title">Opinia gościa</h3><button class="review-close" type="button" data-review-close aria-label="Zamknij pełną opinię"><span aria-hidden="true">×</span></button></div>
     <p class="review-dialog-rating" data-review-full-rating></p>
     <figure><blockquote><p data-review-full-text></p></blockquote><figcaption><cite data-review-full-author></cite><span data-review-full-date></span></figcaption></figure>
+    <div data-review-full-source></div>
   </dialog>
 </reviews-slider>
 <script is:inline src={reviewsScriptUrl} defer></script>
@@ -47,8 +56,9 @@ import reviewsScriptUrl from '../scripts/reviews-slider.js?url&no-inline';
   /* Without JavaScript, the native scroller retains every complete review. */
   .track[data-clamped] .review-text{display:-webkit-box;min-block-size:calc(var(--review-lines) * var(--review-line-height) * 1em);max-block-size:calc(var(--review-lines) * var(--review-line-height) * 1em);overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:var(--review-lines);line-clamp:var(--review-lines)}
   .review-more-slot{min-height:var(--tap-target);margin-block:var(--space-2) var(--space-4)}
-  .review-more{display:inline-flex;min-height:var(--tap-target);align-items:center;padding:0;border:0;background:transparent;color:var(--color-cta);font:inherit;font-weight:700;text-decoration:underline;text-underline-offset:var(--space-1);cursor:pointer;transition:color var(--motion-duration) var(--motion-ease)}
+  .review-more{display:inline-flex;min-height:var(--tap-target);align-items:center;padding-inline:var(--space-4);border:0;border-radius:var(--radius-pill);background-color:var(--color-forest);color:var(--color-white);font:inherit;font-weight:700;cursor:pointer;transition:background-color var(--motion-duration) var(--motion-ease)}
   .review-more[hidden]{display:none}
+  .review-source{display:inline-flex;min-block-size:var(--tap-target);align-items:center;gap:var(--space-1);color:var(--color-cta);font-weight:600;text-decoration:underline;text-underline-offset:var(--space-1)}
   figcaption{display:flex;flex-direction:column;gap:var(--space-1);margin-top:auto}
   cite{color:var(--color-ink);font-style:normal;font-weight:700}
   figcaption>span{color:var(--color-muted);font-size:.84rem;font-weight:500}
@@ -69,7 +79,8 @@ import reviewsScriptUrl from '../scripts/reviews-slider.js?url&no-inline';
   .review-dialog figure{margin:0}.review-dialog blockquote p{margin:0 0 var(--space-6);line-height:var(--review-line-height);overflow-wrap:anywhere}
   @media(hover:hover){
     .review-arrow:hover:enabled,.review-close:hover{background:var(--color-soft)}
-    .review-more:hover{color:var(--color-cta-hover)}
+    .review-more:hover{background-color:var(--color-forest-dark)}
+    .review-source:hover{color:var(--color-cta-hover)}
     .review-dot:hover span{background:var(--color-soft)}
     .review-dot[aria-current="true"]:hover span{background:var(--color-forest)}
   }

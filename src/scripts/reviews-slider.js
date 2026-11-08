@@ -60,10 +60,14 @@ class ReviewsSlider extends HTMLElement {
       target = current;
       if (dots.some((dot) => dot.hidden && dot === document.activeElement)) dots[current].focus({ preventScroll: true });
     };
-    const go = (index) => {
+    const go = (index, behavior = reduced.matches ? 'instant' : 'smooth') => {
       target = Math.max(0, Math.min(index, positions.length - 1));
-      track.scrollTo({ left: positions[target], behavior: reduced.matches ? 'instant' : 'smooth' });
+      track.scrollTo({ left: positions[target], behavior });
     };
+    on(track, 'focusin', (event) => {
+      if (!event.target.matches('.review-source:focus-visible')) return;
+      go(cards.indexOf(event.target.closest('.review-card')), 'instant');
+    });
     on(previous, 'click', () => go(target - 1));
     on(next, 'click', () => go(target + 1));
     dots.forEach((dot, index) => on(dot, 'click', () => go(index)));
@@ -92,6 +96,7 @@ class ReviewsSlider extends HTMLElement {
     }, { passive: false });
 
     if (hasDialog) {
+      const fullSource = dialog.querySelector('[data-review-full-source]');
       track.dataset.clamped = '';
       more.forEach((button, index) => on(button, 'click', () => {
         const card = cards[index];
@@ -99,6 +104,9 @@ class ReviewsSlider extends HTMLElement {
         this.querySelector('[data-review-full-author]').textContent = card.querySelector('[data-review-author]').textContent;
         this.querySelector('[data-review-full-date]').textContent = card.querySelector('[data-review-date]').textContent;
         this.querySelector('[data-review-full-rating]').textContent = card.querySelector('.review-rating').getAttribute('aria-label');
+        const source = card.querySelector('.review-source');
+        fullSource.replaceChildren();
+        if (source) fullSource.append(source.cloneNode(true));
         returnFocus = button;
         dialog.showModal();
         this.querySelector('[data-review-close]').focus();
