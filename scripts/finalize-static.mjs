@@ -3,7 +3,7 @@ import { readFile, writeFile, access, readdir } from 'node:fs/promises';
 
 const dist = new URL('../dist/', import.meta.url);
 const config = await readFile(new URL('../src/config/site.ts', import.meta.url), 'utf8');
-const fields = Object.fromEntries([...config.matchAll(/^\s*(name|description|url|phone|email|address|postalCode|addressLocality):\s*'([^']*)'/gm)].map((match) => [match[1], match[2]]));
+const fields = Object.fromEntries([...config.matchAll(/^ {2}(name|description|url|phone|email|address|postalCode|addressLocality):\s*'([^']*)'/gm)].map((match) => [match[1], match[2]]));
 if (Object.keys(fields).length !== 8) throw new Error('Nie udało się odczytać danych podstawowych z src/config/site.ts');
 const phoneDigits = fields.phone.replace(/\D/g, '');
 const telephone = phoneDigits.length === 9 ? `+48${phoneDigits}` : `+${phoneDigits.replace(/^00/, '')}`;

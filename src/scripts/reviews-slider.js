@@ -51,8 +51,16 @@ class ReviewsSlider extends HTMLElement {
       clearTimeout(settling);
       settling = setTimeout(settle, 180);
     }, { passive: true });
+    track.addEventListener('focusin', (event) => {
+      if (!event.target.matches('.review-source:focus-visible')) return;
+      const index = originals.indexOf(event.target.closest('blockquote'));
+      if (index === -1) return;
+      target = count + index;
+      track.scrollTo({ left: destination(target), behavior: 'instant' });
+      paint();
+    });
     track.addEventListener('keydown', (event) => {
-      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      if (event.target !== track || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
       event.preventDefault();
       go(event.key === 'Home' ? count : event.key === 'End' ? count * 2 - 1 : target + (event.key === 'ArrowRight' ? 1 : -1));
     });
