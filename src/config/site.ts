@@ -2,7 +2,7 @@ const forestDistance = '1 km';
 
 export const site = {
   name: 'Papierówka',
-  description: 'Agroturystyka w miejscowości Wasilkowo, 1 km od Puszczy Białowieskiej. Wypoczynek dla 8–10 osób.',
+  description: 'Agroturystyka w miejscowości Wasilkowo, 1 km od Puszczy Białowieskiej. Wypoczynek dla 8-10 osób.',
   url: 'https://agroturystyka-papierowka.pl',
   phone: '+48 504 867 746',
   phoneHref: 'tel:+48504867746',
@@ -14,8 +14,8 @@ export const site = {
   addressLocality: 'Wasilkowo',
   price: 'Od 500 zł za dobę przy pobycie tygodniowym; ceny weekendowe do uzgodnienia.',
   eventPrice: 'Wieczory panieńskie i kawalerskie: 1 000 zł za dobę.',
-  relaxationPrice: 'Strefa relaksu — sauna i bania — jest dodatkowo płatna; cena do uzgodnienia.',
-  guests: 'dom dla 8–10 osób',
+  relaxationPrice: 'Strefa relaksu - sauna i bania - jest dodatkowo płatna; cena do uzgodnienia.',
+  guests: 'dom dla 8-10 osób',
   forestDistance,
   administrator: 'Dorota Frankowska-Sajewicz',
   checkIn: '16:00',
@@ -24,9 +24,9 @@ export const site = {
   bookingTerms: 'Wysokość opłaty rezerwacyjnej i zasady anulowania pobytu do uzgodnienia przed rezerwacją.',
   bookingContact: 'Termin i szczegóły pobytu potwierdzamy telefonicznie lub przez Messenger. W sprawie zmiany albo anulowania rezerwacji również skontaktujcie się z nami w ten sposób.',
   paymentMethods: 'Za pobyt możecie zapłacić gotówką, przelewem bankowym lub przelewem BLIK na telefon.',
-  kitchenDescription: 'W kuchni czekają na Was piekarnik, mikrofalówka, naczynia i sztućce — możecie gotować tak, jak lubicie.',
-  localFoodDescription: 'Od czasu do czasu rozpalamy naszą wędzarnię i przygotowujemy wędzonki — do spróbowania, a także do kupienia na później. Pojawia się też babka ziemniaczana i inne podlaskie potrawy. Zapytajcie przed przyjazdem, co akurat przygotowujemy.',
-  privacyLegalBasis: 'Dane przetwarzamy na podstawie art. 6 ust. 1 lit. b RODO, gdy kontakt dotyczy podjęcia działań przed rezerwacją lub realizacji pobytu, oraz art. 6 ust. 1 lit. f RODO w zakresie ustalenia, dochodzenia lub obrony ewentualnych roszczeń. Zapytania, które nie zakończyły się rezerwacją, przechowujemy przez 12 miesięcy od zakończenia korespondencji. Dane dotyczące rezerwacji przechowujemy przez okres jej realizacji i rozliczenia oraz do upływu właściwego terminu przedawnienia roszczeń; dokumentację księgową — przez okres wymagany przepisami prawa.',
+  kitchenDescription: 'W kuchni czekają na Was piekarnik, mikrofalówka, naczynia i sztućce - możecie gotować tak, jak lubicie.',
+  localFoodDescription: 'Od czasu do czasu rozpalamy naszą wędzarnię i przygotowujemy wędzonki - do spróbowania, a także do kupienia na później. Pojawia się też babka ziemniaczana i inne podlaskie potrawy. Zapytajcie przed przyjazdem, co akurat przygotowujemy.',
+  privacyLegalBasis: 'Dane przetwarzamy na podstawie art. 6 ust. 1 lit. b RODO, gdy kontakt dotyczy podjęcia działań przed rezerwacją lub realizacji pobytu, oraz art. 6 ust. 1 lit. f RODO w zakresie ustalenia, dochodzenia lub obrony ewentualnych roszczeń. Zapytania, które nie zakończyły się rezerwacją, przechowujemy przez 12 miesięcy od zakończenia korespondencji. Dane dotyczące rezerwacji przechowujemy przez okres jej realizacji i rozliczenia oraz do upływu właściwego terminu przedawnienia roszczeń; dokumentację księgową - przez okres wymagany przepisami prawa.',
   hostingInfo: 'Strona jest hostowana na platformie Vercel (Vercel Inc., USA); polityka prywatności: vercel.com/legal/privacy-policy. Domena zarejestrowana u OVHcloud (OVH SAS, 2 rue Kellermann, 59100 Roubaix, Francja); polityka prywatności: ovhcloud.com/pl/personal-data-management. Wymienieni dostawcy mogą przetwarzać standardowe logi dostępu (adres IP, znacznik czasu, żądanie HTTP) wyłącznie w zakresie niezbędnym do świadczenia usługi.',
   privacyRights: 'Przysługuje Ci prawo dostępu do danych, ich sprostowania, usunięcia lub ograniczenia przetwarzania, a także prawo do wniesienia sprzeciwu wobec przetwarzania. Możesz skontaktować się z administratorem w każdej chwili. Jeśli uważasz, że przetwarzanie narusza przepisy RODO, masz prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (UODO), ul. Stawki 2, 00-193 Warszawa; uodo.gov.pl.',
   // Swap this iframe URL with the src from Google Maps → Share → Embed a map
@@ -87,7 +87,7 @@ export const site = {
 
 export const amenities = [
   { icon: 'home', title: 'Duży dom', text: `Wygodne miejsce dla rodzin i grup: ${site.guests}.` },
-  { icon: 'spa', title: 'Sauna i bania', text: 'Strefa relaksu pod zadaszoną wiatą — dostępna przez cały rok, dodatkowo płatna.' },
+  { icon: 'spa', title: 'Sauna i bania', text: 'Strefa relaksu pod zadaszoną wiatą - dostępna przez cały rok, dodatkowo płatna.' },
   { icon: 'kitchen', title: 'W pełni wyposażona kuchnia', text: site.kitchenDescription },
   { icon: 'wifi', title: 'Wi-Fi i klimatyzacja', text: 'Bezprzewodowy Internet i klimatyzacja na obu piętrach.' },
   { icon: 'bike', title: 'Rowery', text: 'Odkrywaj spokojne drogi i leśne ścieżki na dwóch kółkach.' },

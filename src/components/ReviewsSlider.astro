@@ -3,7 +3,7 @@ import { site } from '../config/site';
 import reviewsScriptUrl from '../scripts/reviews-slider.js?url&no-inline';
 ---
 <reviews-slider role="region" aria-roledescription="karuzela" aria-label="Opinie gości">
-  <div class="track" tabindex="0" aria-label="Opinie — przewijaj strzałkami" id="guest-reviews-track">
+  <div class="track" tabindex="0" aria-label="Opinie - przewijaj strzałkami" id="guest-reviews-track">
     {site.reviews.map((review, index) => <blockquote role="group" aria-roledescription="slajd" aria-label={`${index + 1} z ${site.reviews.length}`}>
       <span class="quote" aria-hidden="true">“</span>
       <div class="review-rating" role="img" aria-label={`Ocena: ${review.rating} na 5 gwiazdek`}>
