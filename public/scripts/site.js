@@ -5,43 +5,6 @@ const heroToggle = document.querySelector('[data-hero-toggle]');
 const heroDots = [...document.querySelectorAll('[data-hero-dot]')];
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-const facts = document.querySelector('[data-count-up]');
-if (facts && 'IntersectionObserver' in window && !reducedMotion.matches) {
-  const counters = [...facts.querySelectorAll('[data-count-to]')].map((node) => ({
-    node,
-    target: Number(node.dataset.countTo),
-  }));
-  const duration = 1200;
-  let frame;
-  const finish = () => {
-    cancelAnimationFrame(frame);
-    observer.disconnect();
-    counters.forEach(({ node, target }) => { node.textContent = String(target); });
-    reducedMotion.removeEventListener('change', onMotionChange);
-  };
-  const onMotionChange = (event) => {
-    if (event.matches) finish();
-  };
-  const observer = new IntersectionObserver((entries) => {
-    if (!entries.some((entry) => entry.isIntersecting)) return;
-    observer.disconnect();
-    const start = performance.now();
-    counters.forEach(({ node }) => { node.textContent = '0'; });
-    const tick = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - (1 - progress) ** 3;
-      counters.forEach(({ node, target }) => {
-        node.textContent = String(Math.floor(target * eased));
-      });
-      if (progress < 1) frame = requestAnimationFrame(tick);
-      else finish();
-    };
-    frame = requestAnimationFrame(tick);
-  });
-  reducedMotion.addEventListener('change', onMotionChange);
-  observer.observe(facts);
-}
-
 // Add data-reveal to a section's inner content or to individual cards. Avoid nesting reveal targets.
 // Only prepare content below the first viewport (or hidden cards that may be expanded later).
 if ('IntersectionObserver' in window && !reducedMotion.matches) {
