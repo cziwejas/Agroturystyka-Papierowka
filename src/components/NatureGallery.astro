@@ -39,7 +39,7 @@ const sizes = (photo: Photo, index: number) => {
   <div class="nature-grid" aria-label={`Zdjęcia: ${section.label}`}>
     {section.photos.map((photo, index) => (
       <figure class:list={['nature-card', `nature-card--${photo.layout || 'square'}`, `nature-card--delay-${index % 4}`]} data-focus={photo.focus}>
-        <a href={photo.preview.src} data-nature-open data-caption={photo.title} data-alt={photo.alt} aria-label={`${photo.title} — powiększ zdjęcie`}>
+        <a href={photo.preview.src} data-nature-open data-caption={photo.title} data-alt={photo.alt} aria-label={`${photo.title} - powiększ zdjęcie`}>
           <Image src={photo.src} alt={photo.alt} width={Math.min(photo.src.width, 1280)} widths={photo.widths} sizes={sizes(photo, index)} format="webp" quality={80} loading="lazy" />
           <span class="nature-expand" aria-hidden="true">↗</span>
         </a>
@@ -48,7 +48,7 @@ const sizes = (photo: Photo, index: number) => {
     ))}
   </div>
 
-  <dialog class="nature-lightbox" data-nature-dialog aria-label={`Zdjęcia — ${section.label}`} aria-describedby={`${section.id}-lightbox-caption`}>
+  <dialog class="nature-lightbox" data-nature-dialog aria-label={`Zdjęcia - ${section.label}`} aria-describedby={`${section.id}-lightbox-caption`}>
     <div class="nature-toolbar">
       <span>{section.label} <span class="nature-count" data-nature-count aria-hidden="true"></span></span>
       <button type="button" data-nature-close aria-label="Zamknij podgląd zdjęcia">×</button>
