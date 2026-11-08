@@ -123,8 +123,9 @@ const gallerySections = await Promise.all(sections.map(async (section) => ({
 <style>
   /* Nav */
   .gallery-nav{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-10)}
-  .gallery-nav-link{display:inline-flex;min-height:40px;align-items:center;padding:var(--space-2) var(--space-5);border:1px solid var(--color-line);border-radius:var(--radius-pill);background:var(--color-white);color:var(--color-ink);font-size:.88rem;font-weight:600;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
-  .gallery-nav-link:hover{background:var(--color-soft);border-color:var(--color-forest);transform:translateY(-1px)}
+  .gallery-nav-link{display:inline-flex;min-height:40px;align-items:center;padding:var(--space-2) var(--space-5);border:1px solid var(--color-line);border-radius:var(--radius-pill);background:var(--color-white);color:var(--color-ink);font-size:.88rem;font-weight:600;text-decoration:none;transition:background-color var(--motion-duration) var(--motion-ease),border-color var(--motion-duration) var(--motion-ease),transform var(--motion-duration) var(--motion-ease)}
+  @media(hover:hover){.gallery-nav-link:hover{background:var(--color-soft);border-color:var(--color-forest)}}
+  @media(hover:hover) and (prefers-reduced-motion:no-preference){.gallery-nav-link:hover{transform:translateY(-1px)}}
 
   /* Section */
   .gallery-section{margin-bottom:var(--space-16)}

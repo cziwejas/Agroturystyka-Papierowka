@@ -13,5 +13,9 @@ import { site } from '../config/site';
   </a>
 </nav>
 <style>
-  .social-links{display:flex;gap:var(--space-2)}.social-links a{display:grid;width:40px;height:40px;place-items:center;border:1px solid #ffffff35;border-radius:50%;background:#ffffff0a;color:var(--color-white);transition:background .2s ease,transform .2s ease}.social-links a:hover{background:#ffffff20;transform:translateY(-2px)}.social-links svg{width:21px;height:21px;fill:currentColor}.social-links a:nth-child(1) svg{fill:#1877f2}.social-links a:nth-child(2) svg{fill:none;stroke:#e1306c;stroke-width:1.8}.social-links a:nth-child(2) .social-dot{fill:#e1306c;stroke:none}.social-links .google-icon{width:24px;height:24px;fill:initial}
+  .social-links{--social-border:#ffffff35;--social-background:#ffffff0a;--social-hover-background:#ffffff20;display:flex;gap:var(--space-2)}
+  .social-links a{display:grid;width:var(--tap-target);height:var(--tap-target);place-items:center;border:1px solid var(--social-border);border-radius:var(--radius-pill);background:var(--social-background);color:var(--color-white);transition:background-color var(--motion-duration) var(--motion-ease),transform var(--motion-duration) var(--motion-ease)}
+  .social-links svg{width:21px;height:21px;fill:currentColor}.social-links a:nth-child(1) svg{fill:#1877f2}.social-links a:nth-child(2) svg{fill:none;stroke:#e1306c;stroke-width:1.8}.social-links a:nth-child(2) .social-dot{fill:#e1306c;stroke:none}.social-links .google-icon{width:24px;height:24px;fill:initial}
+  @media(hover:hover){.social-links a:hover{background:var(--social-hover-background)}}
+  @media(hover:hover) and (prefers-reduced-motion:no-preference){.social-links a:hover{transform:scale(var(--motion-social-scale))}}
 </style>

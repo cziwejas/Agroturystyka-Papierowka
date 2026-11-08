@@ -49,30 +49,35 @@ export const site = {
       author: 'Magdalena P.',
       rating: 5,
       date: 'Luty 2026',
+      url: 'https://share.google/kkbKpwuWGRxmJOIOX',
     },
     {
       text: 'Z przyjemnością wystawiam najwyższą notę. Wszędzie czysto, wszystko przygotowane na nasz przyjazd, a do tego na miejscu wszystko co trzeba, od pełnego wyposażenia kuchni, aż po zeszyty, długopisy. Na obu piętrach klimatyzacja, piękny teren, balia wodna i sauna.... Super!',
       author: 'Filip M.',
       rating: 5,
       date: 'Lipiec 2026',
+      url: 'https://share.google/MGyDPFdGTvxOj3ux8',
     },
     {
       text: 'Tu naprawdę czuwają anioły nad wypoczynkiem i regeneracją. Jestem autorką bajek terapeutycznych i właśnie wpadł mi pomysł do głowy, aby zamieścić Papierówkę w jednej z nich. Jest tu magicznie, wchodzi się tu jak do krainy, gdzie problemy zostają za bramą. Polecam bardzo. Kiedy wydawało mi się, że nigdy już nie odklei się ode mnie zmęczenie i smutek, po godzinie przebywania w tym miejscu, wszystko po prostu wyparowało.',
       author: 'Justyna N.',
       rating: 5,
       date: 'Październik 2026',
+      url: 'https://share.google/E7VuINEynrHpArUp5',
     },
     {
       text: 'Rewelacyjne miejsce. Dom super urządzony i bardzo wygodny. Kuchnia mega wyposażona, nie brakowało niczego. Fajny taras. A wiata ze stołem i jacuzzi, obok sauna to już pełen sztos. O okolicy chyba wiele nie trzeba pisać. Szczególnie polecam spędzenie czasu na rowerze i w ten sposób eksplorowanie ścieżek w puszczy. Można napotkać żubry w lesie. Gospodarze przemili i bardzo pomocni. Szczerze polecam!!!',
       author: 'Tomasz S.',
       rating: 5,
       date: 'Październik 2025',
+      url: 'https://share.google/ZXXlWp9GciHV1SPvT',
     },
     {
       text: 'Cudowne miejsce, które stanowi świetną bazę do zwiedzania regionu! Cisza, spokój zapewniają pełen relaks. Można skorzystać z sauny, bani, grila, ogniska nad stawem. Wszystko to oferuje Papierówka. Wspaniali gospodarze, przyjaźni zwierzakom !!!!! Polecam to miejsce z calego serca !! Wrócimy tu na pewno!',
       author: 'Izabela S.',
       rating: 5,
       date: 'Wrzesień 2024',
+      url: 'https://share.google/Ygaq6ftw2Bqnzh2CR'
     },
   ],
   areaDistances: [
